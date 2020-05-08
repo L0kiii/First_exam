@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.png">
+    <title>天音附中网上报名系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/default.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">招生考试学生端</p>
+    </div>
+</div>
+
+<!-- Main wrapper - style you can find in pages.scss -->
+
+<div id="main-wrapper">
+
+    <!-- Topbar header - style you can find in pages.scss -->
+
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+            <!-- Logo -->
+
+
+            <!-- End Logo -->
+
+
+            <div class="navbar-collapse">
+
+                <!-- toggle and nav items -->
+
+                <div style="margin-left: 40px;">
+                    <h2>欢迎登录天津音乐学院附中招生考试平台</h2>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up" href="javascript:void(0)"><i
+                            class="fa fa-bars"></i></a></li>
+
+                    <!-- Search -->
+
+
+                    <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down"
+                                                                      href="javascript:void(0)"><i
+                            class="fa fa-search"></i></a>
+                        <form class="app-search">
+                            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+                                class="fa fa-times"></i></a></form>
+                    </li>
+                </ul>
+
+                <!-- User profile and search -->
+
+
+                <ul class="navbar-nav my-lg-0">
+
+
+                    <!-- Profile -->
+
+                    <li class="nav-item dropdown u-pro">
+                        <div class="1h-100 table-responsive">
+                            <table cellspacing="0" cellpadding="0" style="color: #A2A9B3;">
+                                <tr>
+                                    <td width="20"></td>
+                                    <td></td>
+                                    <td width="20"></td>
+                                    <td>
+                                        <i class="icon" style="font-style: normal;">姓名：</i>
+                                    </td>
+                                    <td>
+                                        <span id="info-name"></span>
+                                    </td>
+
+                                    <td width="20"></td>
+                                    <td>
+                                        <i style="font-style: normal;">身份证号：</i>
+                                    </td>
+                                    <td><span id="info-username"></span></td>
+
+                                    <td width="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- End Topbar header -->
+
+
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="" href="/student/index" aria-expanded="false">
+                        <i class="fa fa-tachometer"></i><span class="hide-menu">报名流程</span></a>
+                    </li>
+                    <li id="display" hidden><a class="" href="/student/submit" aria-expanded="false">
+                        <i class="fa fa-user-circle-o"></i><span class="hide-menu">报名中心</span></a>
+                    </li>
+                    <li><a class="" href="/student/self" aria-expanded="false">
+                        <i class="fa fa-table"></i><span class="hide-menu">报名详情</span></a>
+                    </li>
+                    <li><a class="" href="/student/pay" aria-expanded="false">
+                        <i class="fa fa-smile-o"></i><span class="hide-menu">报名缴费</span></a>
+                    </li>
+                    <li><a class="" href="/student/exam1" aria-expanded="false">
+                        <i class="fa fa-globe"></i><span class="hide-menu">考试信息</span></a>
+                    </li>
+                    <li><a class="" href="/student/result" aria-expanded="false">
+                        <i class="fa fa-question-circle"></i><span class="hide-menu">查询结果</span></a>
+                    </li>
+                </ul>
+                <div class="text-center m-t-30">
+                    <a href="/logout" class="btn btn-info hidden-md-down"> 退出登录</a>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+
+        <div class="container-fluid">
+
+            <!-- Bread crumb and right sidebar toggle -->
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">查询结果</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">个人管理中心</a></li>
+                        <li class="breadcrumb-item active">查询结果</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <a href="/student/index" class="btn  btn btn-info pull-right hidden-sm-down"> 返回首页</a>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group table-responsive">
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-default">
+                            <th scope="row">1</th>
+                            <td>审核</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" id="seeAudit" data-toggle="modal"
+                                        data-target="#shenhe">
+                                    点击查看
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="shenhe" tabindex="-1" role="dialog"
+                                     aria-labelledby="shenheTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">审核结果</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="audit-info">
+                                                <span>暂无审核信息</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="button" class="btn btn-primary">确认</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="table-default">
+                            <th scope="row">2</th>
+                            <td>考试结果</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" id="seeExam1Result" data-toggle="modal"
+                                        data-target="#chushi">
+                                    点击查看
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="chushi" tabindex="-1" role="dialog"
+                                     aria-labelledby="chushiTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">考试结果</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="exam1Result">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="button" class="btn btn-primary">确认</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page wrapper  -->
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="https://cdn.bootcss.com/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/static/js/sidebarmenu.js"></script>
+<script src="/static/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/static/js/custom.min.js"></script>
+<script src="/static/js/init.js"></script>
+<script>
+    function exists(v) {
+        return typeof (v) !== "undefined" && v != null && v !== "";
+    }
+
+    $("#seeAudit").on("click", () => {
+        let auditInfoSelector = $("#audit-info");
+        $.ajax({
+            url: "/api/applications/audit_info",
+            method: "get",
+            dataType: "json",
+            success: (data) => {
+                auditInfoSelector.empty();
+                if (data.data.length === 0)
+                    auditInfoSelector.append($("<span></span>").text("暂无审核信息"));
+                $.each(data.data, (i, item) => {
+                    let infoSpan;
+                    let info = item.professional_category + "-" + item.professional_name;
+                    let rejectReason = item.reject_reason;
+                    if (i !== 0)
+                        auditInfoSelector.append("<hr>");
+                    if (item.stage > 0 && item.stage !== 5) {
+                        infoSpan = $("<span style='color:rgb(104, 226, 80);font-weight: 500;'></span>");
+                        auditInfoSelector.append(infoSpan.text(info + "：审核已通过"));
+                    } else if (item.stage === 0) {
+                        infoSpan = $("<span></span>");
+                        auditInfoSelector.append(infoSpan.text(info + "未审核，请耐心等待"));
+                    } else {
+                        infoSpan = $("<span style='color:rgb(239, 12, 50) ;font-weight: 500;'></span>");
+                        auditInfoSelector.append(infoSpan.text(info + "审核未通过" + "-----" + "原因:" + rejectReason));
+                    }
+                })
+            },
+            error: () => {
+                alert("与服务器通讯失败");
+            }
+        });
+    });
+    //初试
+    $("#seeExam1Result").on("click", () => {
+        let exam1ResultSelector=$("#exam1Result");
+        $.ajax({
+            url: "/api/applications/exam_result?stage=1",
+            method: "get",
+            dataType: "json",
+            success: (data) => {
+                exam1ResultSelector.empty();
+                if (data.data.length === 0)
+                    exam1ResultSelector.append($("<span></span>").text("暂无考试信息"));
+                $.each(data.data, (i, item) => {
+                    let infoSpan;
+                    let major = item.professional_category + "-" + item.professional_name;
+                    let score = item.first_score;
+                    if (i !== 0)
+                        exam1ResultSelector.append("<hr>");
+                    if ((item.stage > 1 && item.stage < 5) || item.stage > 6) {
+                        infoSpan = $("<span style='color:rgb(104, 226, 80);font-weight: 500;'></span>");
+                        exam1ResultSelector.append(infoSpan.text("恭喜你！已被录取!" + "----" +major + "的分数是：" + score));
+                    } if (item.stage <= 1) {
+                        infoSpan = $("<span></span>");
+                        exam1ResultSelector.append(infoSpan.text(major + "考试结果未出请耐心等待"))
+                    } if (item.stage === 6) {
+                        infoSpan = $("<span style='color:rgb(239, 12, 50) ;font-weight: 500;'></span>");
+                        exam1ResultSelector.append(infoSpan.text("很遗憾,您暂未通过考试" + "----" + major + "的分数是：" + score));
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    $.ajax({
+        url: "/api/applications",
+        method: "get",
+        dataType: "json",
+        success: (data) => {
+            let length = data.data.length;
+            if (length === 0) {
+                alert('暂无报考信息，将为您导航至报名中心!');
+                location.href = "/student/submit";
+                $("#display").removeAttr("hidden");
+            }
+        }
+    })
+</script>
+</body>
+</html>

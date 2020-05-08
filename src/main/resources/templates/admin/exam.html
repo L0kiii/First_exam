@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/fontawesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <!-- layui js -->
+    <script src="/static/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="wangid_conbox">
+    <!-- 当前位置 -->
+    <div class="zy_weizhi bord_b">
+        <i class="fa fa-home fa-3x"></i>
+        <a>首页</a>
+        <a>考务管理中心</a>
+        <span id="examStage"></span>
+    </div>
+    <!-- 筛选 -->
+    <div id="searchForm" class="shuaix">
+        <div class="left">
+            <b>年级：</b>
+            <select name="grade">
+                <option value="">全部</option>
+                <option value="小六">小六</option>
+                <option value="初一">初一</option>
+                <option value="初三">初三</option>
+                <option value="高一">高一</option>
+            </select>
+        </div>
+        <div class="right">
+            <input type="text" name="name" style="width: 120px" placeholder="姓名">
+            <input type="text" name="userIdNum" placeholder="身份证号">
+            <input type="text" name="professionalCategory" placeholder="专业类别">
+            <input type="text" name="professionalName" placeholder="专业方向">
+            <input type="text" name="year" placeholder="年份">
+            <a id="search">搜索</a>
+        </div>
+    </div>
+    <!-- 下面写内容 -->
+    <table class="layui-table" id="table" lay-filter="examList" lay-size="lg">
+    </table>
+
+</div>
+<!-- 自定义头部工具栏 -->
+<!--导入样式stage需要更改-->
+<script type="text/html" id="toolbarDemo">
+    <form method="post" enctype="multipart/form-data" id="submitForm" name="form">
+        <a class="layui-btn layui-btn-sm" type="button" id="export">审核导出</a>
+        <input type="file" name="file">
+        <button class="layui-btn layui-btn-sm" type="button" id="import">导入</button>
+    </form>
+</script>
+<script type="text/html" id="examToolBar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script>
+    var stage = Number(location.search.substr(1));
+    var columns = [ //表头
+        {
+            field: 'id',
+            title: 'ID',
+            fixed: 'left',
+            width: '8%'
+        }, {
+            field: 'name',
+            title: '姓名',
+            width: '12%'
+        },{
+            field: 'professionalName',
+            title: '专业方向',
+            width: '15%'
+        }];
+    switch (stage) {
+        case 1:
+            $("#examStage").text("初试");
+            columns.push({
+                field: 'examNum',
+                title: '准考证号',
+                width: '15%',
+                edit: 'text'
+            }, {
+                field: 'firstExamTime',
+                title: '初试时间',
+                width: '15%',
+                edit: 'text'
+            }, {
+                field: 'firstExamAddress',
+                title: '初试地点',
+                width: '20%',
+                edit: 'text'
+            }, {
+                title: '操作',
+                fixed: 'right',
+                align: 'center',
+                toolbar: '#examToolBar',
+                width: '15%'
+            });
+            break;
+        case 2:
+            $("#examStage").text("复试");
+            columns.push({
+                field: 'examNum',
+                title: '准考证号',
+                width: '15%',
+                edit: 'text'
+            }, {
+                field: 'secondExamTime',
+                title: '复试时间',
+                width: '15%',
+                edit: 'text'
+            }, {
+                field: 'secondExamAddress',
+                title: '复试地点',
+                width: '20%',
+                edit: 'text'
+            }, {
+                title: '操作',
+                fixed: 'right',
+                align: 'center',
+                toolbar: '#examToolBar',
+                width: '15%'
+            });
+            break;
+        case 3:
+            $("#examStage").text("文考");
+            columns.push({
+                field: 'culturalExamNum',
+                title: '文考准考证号',
+                width: '15%',
+                edit: 'text'
+            }, {
+                field: 'culturalExamTime',
+                title: '文考时间',
+                width: '15%',
+                edit: 'text'
+            }, {
+                field: 'culturalExamAddress',
+                title: '文考地点',
+                width: '20%',
+                edit: 'text'
+            }, {
+                title: '操作',
+                fixed: 'right',
+                align: 'center',
+                toolbar: '#examToolBar',
+                width: '15%'
+            });
+            break;
+    }
+    var apiUrl = '/api/applications/page?stage=' + stage + '&status=1';
+    var tableOptions = {
+        elem: '#table',
+        height: 'full-130',
+        url: apiUrl,
+        toolbar:'#toolbarDemo',
+        request: {
+            pageName: 'cur',
+            limitName: 'per'
+        },
+        page: true,
+        limits: [10, 20, 30, 40, 50, 80],
+        cols: [
+            columns
+        ], response: {
+            statusCode: 1
+        },
+        parseData: function (res) {
+            return {
+                "code": res.code,
+                "msg": res.msg,
+                "count": res.data.total,
+                "data": res.data.records
+            }
+        }
+    };
+    function form2JsonString(formId) {
+        let paramArray = $('#' + formId).serializeArray();
+        let jsonObj = {};
+        $(paramArray).each(function () {
+            jsonObj[this.name] = this.value;
+        });
+        return JSON.stringify(jsonObj);
+    }
+
+    var exportUrl = '/export/application?status=1&stage=' + stage;
+    var importUrl = '/import/exam?stage=' + stage;
+    function toLine(name) {
+        return name.replace(/([A-Z])/g, "_$1").toLowerCase();
+    }
+
+    layui.use('table', function () {
+        var table = layui.table;
+        table.render(tableOptions);
+        //监听工具条
+        $("#search").on("click", () => {
+            tableOptions.url = apiUrl;
+            $("#searchForm [name]").each(function () {
+                if ($(this).val() !== "") {
+                    tableOptions.url += "&" + $(this).attr("name") + "=" + $(this).val();
+                }
+            });
+            table.reload("table", tableOptions);
+        });
+        $("#import").on("click", function () {
+            layer.confirm("<b>注意事项</b><p>请确保：<br>1.导入文件使用的是导出的样板文件<br>2.未擅自更改增删表格列<br>3.对于是/否选项仅填写是/否，确保内容无多余空格<br><br>否则可能导入失败并导致数据出现错误</br>",
+                {btn: ["导入", "取消"]}, function () {
+                    $("#import").attr("disabled");
+                    $("#import").text("导入中");
+                    $("#submitForm").ajaxSubmit({
+                        method: "post",
+                        url: importUrl,
+                        success: (data) => {
+                            if (data.code === 1) {
+                                layer.msg("导入成功");
+                                table.reload("table", tableOptions);
+                            } else {
+                                layer.msg("导入失败: " + data.msg);
+                            }
+                        }, error: () => {
+                            layer.msg("导入失败，请稍后再试");
+                        }, complete: () => {
+                            $("#import").removeAttr("disabled");
+                            $("#import").text("导入");
+                        }
+                    });
+                });
+        });
+        //导出
+        $("#export").attr("href", exportUrl);
+        $("#export").on("click", function () {
+            layer.msg("正在导出，导出时间据数据量而定，请耐心等待，导出过程中请勿重复导出");
+        });
+        table.on('tool(examList)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            let id = obj.data.id;
+            if (layEvent === 'del') { //删除
+                layer.confirm('确定删除该报名信息吗？删除后不可撤销', function (index) {
+                    let ids = [];
+
+                    ids.push(id);
+                    layer.msg('[ID: ' + id + '] ' + ' 删除中，请稍后');
+                    $.ajax({
+                        url: "/api/applications",
+                        method: "delete",
+                        data: JSON.stringify(ids),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: (data) => {
+                            if (data.code === 1) {
+                                layer.msg('[ID: ' + id + '] 删除成功');
+                            } else {
+                                layer.msg('[ID: ' + id + '] 删除失败：' + data.msg);
+                            }
+                        },
+                        error: () => {
+                            layer.msg("与服务器通讯失败，请联系服务器管理员");
+                        }
+                    });
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                });
+            }
+        });
+        table.on('edit(examList)', function (obj) {
+
+            let value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field//得到字段
+                , map = {}
+                , id = data.id;
+            map[toLine(field)] = value;
+            map["id"] = id;
+
+            layer.msg('[ID: ' + id + '] ' + $("[data-field='" + field + "'] div span").text() + ' 修改中，请稍后');
+            $.ajax({
+                url: "/api/applications/edit",
+                method: "post",
+                data: JSON.stringify(map),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: (data) => {
+                    if (data.code === 1) {
+                        layer.msg('[ID: ' + id + '] ' + $("[data-field='" + field + "'] div span").text() + ' 成功更改为：' + value);
+                    } else {
+                        layer.msg('[ID: ' + id + '] ' + $("[data-field='" + field + "'] div span").text() + ' 修改失败：' + data.msg);
+                    }
+                },
+                error: () => {
+                    layer.msg("与服务器通讯失败，请联系服务器管理员");
+                }
+            });
+        })
+    });
+
+</script>
+
+
+</body>
+
+</html>

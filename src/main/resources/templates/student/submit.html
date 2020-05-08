@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.png">
+    <title>天音附中网上报名系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/default.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">招生考试学生端</p>
+    </div>
+</div>
+
+<!-- Main wrapper - style you can find in pages.scss -->
+
+<div id="main-wrapper">
+
+    <!-- Topbar header - style you can find in pages.scss -->
+
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+            <!-- Logo -->
+
+
+            <!-- End Logo -->
+
+
+            <div class="navbar-collapse">
+
+                <!-- toggle and nav items -->
+
+                <div style="margin-left: 40px;">
+                    <h2>欢迎登录天津音乐学院附中招生考试平台</h2>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up" href="javascript:void(0)"><i
+                            class="fa fa-bars"></i></a></li>
+
+                    <!-- Search -->
+
+
+                    <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down"
+                                                                      href="javascript:void(0)"><i
+                            class="fa fa-search"></i></a>
+                        <form class="app-search">
+                            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+                                class="fa fa-times"></i></a></form>
+                    </li>
+                </ul>
+
+                <!-- User profile and search -->
+
+
+                <ul class="navbar-nav my-lg-0">
+
+
+                    <!-- Profile -->
+
+                    <li class="nav-item dropdown u-pro">
+                        <div class="1h-100 table-responsive">
+                            <table cellspacing="0" cellpadding="0" style="color: #A2A9B3;">
+                                <tr>
+                                    <td width="20"></td>
+                                    <td></td>
+                                    <td width="20"></td>
+                                    <td>
+                                        <i  class="icon" style="font-style: normal;">姓名：</i>
+                                    </td>
+                                    <td>
+                                        <span id="info-name"></span>
+                                    </td>
+
+                                    <td width="20"></td>
+                                    <td>
+                                        <i  style="font-style: normal;">身份证号：</i>
+                                    </td>
+                                    <td><span id="info-username"></span></td>
+
+                                    <td width="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- End Topbar header -->
+
+
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="" href="/student/index"  aria-expanded="false">
+                        <i class="fa fa-tachometer"></i><span class="hide-menu">报名流程</span></a>
+                    </li>
+                    <li id="display" hidden><a class="" href="/student/submit"  aria-expanded="false">
+                        <i class="fa fa-user-circle-o"></i><span class="hide-menu">报名中心</span></a>
+                    </li>
+                    <li><a class="" href="/student/self"  aria-expanded="false">
+                        <i class="fa fa-table"></i><span class="hide-menu">报名详情</span></a>
+                    </li>
+                    <li><a class="" href="/student/pay"  aria-expanded="false">
+                        <i class="fa fa-smile-o"></i><span class="hide-menu">报名缴费</span></a>
+                    </li>
+                    <li><a class="" href="/student/exam1"  aria-expanded="false">
+                        <i class="fa fa-globe"></i><span class="hide-menu">考试信息</span></a>
+                    </li>
+                    <li><a class="" href="/student/result"  aria-expanded="false">
+                        <i class="fa fa-question-circle"></i><span class="hide-menu">查询结果</span></a>
+                    </li>
+                </ul>
+                <div class="text-center m-t-30">
+                    <a href="/logout" class="btn btn-info hidden-md-down"> 退出登录</a>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- Page wrapper  -->
+
+    <div class="page-wrapper">
+
+        <!-- Container fluid  -->
+
+        <div class="container-fluid">
+
+            <!-- Bread crumb and right sidebar toggle -->
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">报名中心</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">个人管理中心</a></li>
+                        <li class="breadcrumb-item active">报名中心</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <a href="/student/index" class="btn btn btn-info pull-right hidden-sm-down"> 返回首页</a>
+                </div>
+            </div>
+
+            <!-- End Bread crumb and right sidebar toggle -->
+
+
+            <!-- Sales Chart and browser state-->
+
+
+            <section id="contact-area" style="margin-top:-100px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <!--start contact form-->
+                            <div class="contact-box text-center">
+                                <form id="submitForm" action="/api/applications" method="post" name="form">
+                                    <!-- 基本start -->
+                                    <h3>考生基本信息填写</h3>
+                                    </br>
+                                    <span style="text-align: center;color: #fb3a3a">请仔细核对报名信息 一经提交无法修改！</span>
+                                    <br>
+                                    <br>
+                                    <!-- start-->
+                                    <div class="form-row">
+                                        <!-- 基础信息 -->
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" id="stuId" name="stuId"
+                                                   placeholder="全国统一学籍号*" required>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" id="examineeId" name="examineeId"
+                                                   placeholder="中考考号(可不填)">
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <select id="professionalCategory" name="professionalCategory"
+                                                    class="form-control" required>
+                                                <option disabled hidden>专业分类*</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <select id="professionalName" name="professionalName" class="form-control"
+                                                    required>
+                                                <option disabled hidden>专业方向*</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                   placeholder="姓名*" required>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <select id="gender" name="gender" class="form-control" required
+                                                    style="height: 50px">
+                                                <option disabled hidden>性别*</option>
+                                                <option value="男">男</option>
+                                                <option value="女">女</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" style="background-color:white;color: black" id="birth" name="birth"
+                                                   placeholder="出生日期*" required>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <select id="nation" name="nation" class="form-control" required>
+                                                <option disabled hidden>民族*</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <select id="politicalStatus" name="politicalStatus" class="form-control"
+                                                    required>
+                                                <option disabled hidden>政治面貌*</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <select id="householdRegistrationCategory"
+                                                    name="householdRegistrationCategory" class="form-control" required>
+                                                <option disabled hidden>户籍类别*</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+
+                                            <select id="province" class="form-control" required>
+                                                <option value="" disabled hidden>户籍所在省*</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+
+                                            <select id="city" class="form-control" required>
+                                                <option value="" disabled hidden>户籍所在市*</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <select id="area" class="form-control">
+                                                <option value="" disabled hidden>户籍所在区*</option>
+                                            </select>
+                                        </div>
+                                        <input id="householdRegistration" name="householdRegistration" hidden>
+                                        <div class="form-group col-lg-6">
+                                            <select id="grade" name="grade" class="form-control" required>
+                                                <option value="" disabled>所在年级*</option>
+                                                <option value="小六">小学六年级</option>
+                                                <option value="初一">初一</option>
+                                                <option value="初三">初三</option>
+                                                <option value="高一">高一</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <select id="fresh" name="fresh" class="form-control" required>
+                                                <option value="" disabled hidden>是否应届毕业生*</option>
+                                                <option value="1">是</option>
+                                                <option value="0">否</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" class="form-control" id="graduatedSchool"
+                                                   name="graduatedSchool" placeholder="毕业学校*" required>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" id="householdRegistrationAddress"
+                                                   name="householdRegistrationAddress" placeholder="户籍地址(填户口本首页地址)*"
+                                                   required>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" id="policeStation"
+                                                   name="policeStation" placeholder="所属派出所*" required>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" class="form-control" id="userIdNum" name="userIdNum"
+                                                   placeholder="身份证号码*" required>
+                                        </div>
+
+
+                                        <!-- Email -->
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" id="addressee" name="addressee"
+                                                   placeholder="收信人*" required>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" class="form-control" id="postcode" name="postcode"
+                                                   placeholder="邮编*" required>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" class="form-control" id="addresseeAddr"
+                                                   name="addresseeAddr" placeholder="收信人地址*" required>
+                                        </div>
+                                        </br>
+                                        </br>
+                                        </br>
+                                        <div class="form-group table-responsive">
+                                            <h5>家庭主要成员</h5>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">姓名</th>
+                                                    <th scope="col">身份证号</th>
+                                                    <th scope="col">联系手机</th>
+                                                    <th scope="col">工作单位</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td><input type="text" class="form-control " id="fatherName"
+                                                               name="fatherName" placeholder="父亲姓名"></td>
+                                                    <td><input type="text" class="form-control " id="fatherId"
+                                                               name="fatherId" placeholder="身份证号"></td>
+                                                    <td><input type="text" class="form-control " id="fatherPhone"
+                                                               name="fatherPhone" placeholder="联系方式"></td>
+                                                    <td><input type="text" class="form-control " id="fatherJob"
+                                                               name="fatherJob" placeholder="工作单位"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="form-control " id="motherName"
+                                                               name="motherName" placeholder="母亲姓名"            ></td>
+                                                    <td><input type="text" class="form-control " id="motherId"
+                                                               name="motherId" placeholder="身份证号"></td>
+                                                    <td><input type="text" class="form-control " id="motherPhone"
+                                                               name="motherPhone" placeholder="联系方式"></td>
+                                                    <td><input type="text" class="form-control " id="motherJob"
+                                                               name="motherJob" placeholder="工作单位"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- 基本end -->
+                                    <div class="form-row" id="uploads">
+                                        <div class="form-group table-responsive">
+                                            <center><strong><label>附件上传</label></strong></center>
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col"></th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr id="avatarUrlLabel" class="table">
+                                                    <th scope="row">1</th>
+                                                    <td>一寸照片</td>
+                                                    <td>
+                                                        <label type="button" class="btn">
+                                                            <span>选择图片</span>
+                                                            <input type="file" id="avatarUrlUploader">
+                                                            <span></span>
+                                                            <input type="text" id="avatarUrl" name="avatarUrl" hidden>
+
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr id="idFrontUrlLabel">
+                                                    <th scope="row">2</th>
+                                                    <td>身份证正面</td>
+                                                    <td>
+
+                                                        <label type="button" class="btn">
+                                                            <span>选择图片</span>
+                                                            <input type="file" id="idFrontUploader">
+                                                            <span></span>
+                                                            <input type="text" id="idFrontUrl" name="idFrontUrl" hidden>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr id="idBackUrlLabel">
+                                                    <th scope="row">3</th>
+                                                    <td>身份证反面</td>
+                                                    <td>
+
+                                                        <label type="button" class="btn">
+                                                            <span>选择图片</span>
+                                                            <input type="file" id="idBackUploader">
+                                                            <span></span>
+                                                            <input type="text" id="idBackUrl" name="idBackUrl" hidden>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr id="householdRegistrationHomePageUrlLabel">
+                                                    <th scope="row">4</th>
+                                                    <td>户口本首页</td>
+                                                    <td>
+                                                        <label type="button" class="btn">
+                                                            <span>选择图片</span>
+                                                            <input type="file"
+                                                                   id="householdRegistrationHomePageUrlUploader">
+                                                            <span></span>
+                                                            <input type="text" id="householdRegistrationHomePageUrl"
+                                                                   name="householdRegistrationHomePageUrl" hidden>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr id="householdRegistrationPersonalPageUrlLabel">
+                                                    <th scope="row">5</th>
+                                                    <td>户口本本人页</td>
+                                                    <td>
+                                                        <label type="button" class="btn">
+                                                            <span>选择图片</span>
+                                                            <input type="file"
+                                                                   id="householdRegistrationPersonalPageUrlUploader">
+                                                            <span></span>
+                                                            <input type="text" id="householdRegistrationPersonalPageUrl"
+                                                                   name="householdRegistrationPersonalPageUrl" hidden>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr id="recommendationUrlLabel">
+                                                    <th scope="row">6</th>
+                                                    <td>报考介绍信</td>
+                                                    <td>
+                                                        <label type="button" class="btn">
+                                                            <span>选择图片</span>
+                                                            <input type="file" id="recommendationUrlUploader">
+                                                            <span></span>
+                                                            <input type="text" id="recommendationUrl"
+                                                                   name="recommendationUrl" hidden>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <span style="text-align: center;color: #fb3a3a">请仔细核对报名信息 一经提交无法修改！</span>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <button type="button" class="btn btn-success" id="submit">提交</button>
+                                </form>
+                            </div>
+                            <!--end contact form-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!-- All Jquery -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="https://cdn.bootcss.com/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/js/options.js" charset="utf-8"></script>
+<!-- script-checkdate -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!--<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>-->
+<script src="/static/js/sidebarmenu.js"></script>
+<script src="/static/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/static/js/custom.min.js"></script>
+<script src="/static/js/init.js"></script>
+<script src="/static/js/upload.js"></script>
+<script>
+
+    $("#avatarUrlUploader").on("change", () => {
+        uploadImage($("#avatarUrlUploader"), $("#avatarUrl"), $("#avatarUrlLabel"));
+    });
+    $("#idFrontUploader").on("change", () => {
+        uploadImage($("#idFrontUploader"), $("#idFrontUrl"), $("#idFrontUrlLabel"));
+    });
+    $("#idBackUploader").on("change", () => {
+        uploadImage($("#idBackUploader"), $("#idBackUrl"), $("#idBackUrlLabel"));
+    });
+    $("#householdRegistrationHomePageUrlUploader").on("change", () => {
+        uploadImage($("#householdRegistrationHomePageUrlUploader"), $("#householdRegistrationHomePageUrl"), $("#householdRegistrationHomePageUrlLabel"));
+    });
+    $("#householdRegistrationPersonalPageUrlUploader").on("change", () => {
+        uploadImage($("#householdRegistrationPersonalPageUrlUploader"), $("#householdRegistrationPersonalPageUrl"), $("#householdRegistrationPersonalPageUrlLabel"));
+    });
+    $("#recommendationUrlUploader").on("change", () => {
+        uploadImage($("#recommendationUrlUploader"), $("#recommendationUrl"), $("#recommendationUrlLabel"));
+    });
+</script>
+<script>
+    function form2JsonString(formId) {
+        let paramArray = $('#' + formId).serializeArray();
+        let jsonObj = {};
+        $(paramArray).each(function () {
+            jsonObj[this.name] = this.value;
+        });
+        return JSON.stringify(jsonObj);
+    }
+
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    let apiUrl = "/api/applications";
+    $('select').prop('selectedIndex', 0);
+    addOptions("nation", nation);
+    addOptions("politicalStatus", politicsStatus);
+    addOptions("householdRegistrationCategory", householdRegistrationCategory);
+    initProfessional("professionalCategory", "professionalName");
+    initProvinceDetail("province", "city", "area");
+
+    let id = GetRequest().id;
+    if (!(typeof id === "undefined")) {
+        $.ajax({
+            url: apiUrl + "/" + id,
+            method: "get",
+            dataType: "json",
+            success: (data) => {
+                if (data.code === 1) {
+                    let obj = data.data;
+                    for (var item in obj) {
+                        $("#" + item).val(obj[item]);
+                        if (item.endsWith("Url") && obj[item] != null && obj[item].length > 0) {
+                            $("#" + item + "Label").attr("class", "table-info");
+                        }
+                        if (item.startsWith("professional"))
+                            $("#" + item + " option").first().replaceWith(new Option(obj[item], obj[item], true, true));
+                    }
+                    if ($("#householdRegistration").val().length > 0) {
+                        let household = $("#householdRegistration").val().split("-");
+                        $("#province option").first().replaceWith(new Option(household[0], household[0], true, true));
+                        $("#city option").first().replaceWith(new Option(household[1], household[1], true, true));
+                        $("#area option").first().replaceWith(new Option(household[2], household[2], true, true));
+                        if ($("#city").val() === 0) {
+                            $("#city").attr("disabled", "true");
+                        }
+                        if ($("#area").val() === 0) {
+                            $("#area").attr("disabled", "true");
+                        }
+                    }
+                    apiUrl += "/?id=" + id;
+                }
+            }
+        })
+    }
+
+    $("#submit").click(() => {
+        let province = $("#province").val();
+        let city = $("#city").val();
+        let area = $("#area").val();
+        $("#householdRegistration").val(province + "-" + city + "-" + area);
+    });
+    $("#birth").flatpickr({
+        locale: {
+            firstDayOfWeek: 1,
+            weekdays: {
+                shorthand: ['一', '二', '三', '四', '五', '六', '日'],
+                longhand: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            },
+            months: {
+                shorthand: ['一', '二', '三', '四', '五', '六', "七", "八", "九", "十", "十一", "十二"],
+                longhand: ['一月', '二月', '三月', '四月', '五月', '六月', "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            },
+        },
+    });
+
+    $("#submit").on("click", function () {
+        $(this).attr("disabled", "true");
+        $(this).text("提交中");
+        if ($("#motherName").val() === "" && $("#fatherName").val() === "") {
+            alert("请至少填写一名父母信息");
+            return;
+        }
+        $.ajax({
+            type: "post",
+            url: apiUrl,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: form2JsonString("submitForm"),
+            success: (data) => {
+                if (data.code === 1) {
+                    alert("提交报名成功");
+                    location.href = "/student/self";
+                } else if (data.code === 10001) {
+                    alert(data.data);
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: () => {
+                alert("服务端出现错误，请稍后再试");
+            },
+            complete: () => {
+                $("#submit").removeAttr("disabled");
+                $("#submit").text("提交");
+            }
+        });
+    })
+</script>
+<script>
+    $.ajax({
+        url: "/api/setting",
+        method: "get",
+        success: function (data) {
+            if (data.data.allowApply !== true) {
+                alert("未到报名时间");
+                location.href = "/";
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+

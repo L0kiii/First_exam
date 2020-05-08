@@ -1,0 +1,289 @@
+<!-- 列表的详情 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+<link rel="stylesheet" href="/static/css/children.css">
+
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+
+
+<body style="background: #fff;">
+<div class="tianjia_xx">
+    <table id="form" class="if_tianjiatext layui-table" lay-filter="detailList"lay-size="lg">
+        <tbody>
+        <tr>
+            <td class="td_1">姓名</td>
+            <td><span id="name"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">性别</td>
+            <td><span id="gender"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">出生日期</td>
+            <td><span id="birth"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">民族</td>
+            <td><span id="nation"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">政治面貌</td>
+            <td><span id="politicalStatus"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">学籍号</td>
+            <td><span id="stuId"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">中考考号</td>
+            <td><span id="examineeId"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">专业类别</td>
+            <td><span id="professionalCategory"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">专业方向</td>
+            <td><span id="professionalName"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">身份证号</td>
+            <td><span id="userIdNum"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">户籍类别</td>
+            <td><span id="householdRegistrationCategory"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">户籍所在地</td>
+            <td><span id="householdRegistration"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">所在年级</td>
+            <td><span id="grade"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">是否应届毕业生</td>
+            <td><span id="fresh"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">毕业学校</td>
+            <td><span id="graduatedSchool"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">户籍地址</td>
+            <td><span id="householdRegistrationAddress"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">所属派出所</td>
+            <td><span id="policeStation"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">收信人</td>
+            <td><span id="addressee"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">邮编</td>
+            <td><span id="postcode"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">收信人地址</td>
+            <td><span id="addresseeAddr"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">父亲姓名</td>
+            <td><span id="fatherName"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">父亲身份证</td>
+            <td><span id="fatherId"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">父亲联系方式</td>
+            <td><span id="fatherPhone"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">父亲工作单位</td>
+            <td><span id="fatherJob"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">母亲姓名</td>
+            <td><span id="motherName"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">母亲身份证</td>
+            <td><span id="motherId"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">母亲联系方式</td>
+            <td><span id="motherPhone"></span></td>
+        </tr>
+        <tr>
+            <td class="td_1">母亲工作单位</td>
+            <td><span id="motherJob"></span></td>
+        </tr>
+
+        <tr>
+            <td><span>一寸照片：</span></td>
+            <td><img id="avatarUrl" style="height: 160px; width: 120px; "/></td>
+
+        </tr>
+        <tr>
+            <td><span>身份证正面：</span></td>
+            <td><img id="idFrontUrl" style="height: 160px; width: 120px; "/></td>
+
+        </tr>
+        <tr>
+            <td><span>身份证反面：</span></td>
+            <td><img id="idBackUrl" style="height: 160px; width: 120px; "/></td>
+        </tr>
+        <tr>
+            <td><span>户口本首页：</span></td>
+            <td><img id="householdRegistrationHomePageUrl" style="height: 160px; width: 120px; "/></td>
+        </tr>
+        <tr>
+            <td><span>户口本本人页：</span></td>
+            <td><img id="householdRegistrationPersonalPageUrl" style="height: 160px; width: 120px; "/></td>
+        </tr>
+        <tr>
+            <td><span>报考介绍信：</span></td>
+            <td><img id="recommendationUrl" style="height: 160px; width: 120px; "/></td>
+        </tr>
+
+        <tr>
+            <td class="td_1">审核结果</td>
+            <td>
+                <div class="layui-input-inline">
+                    <select id="result">
+                        <option value="">请选择审核结果</option>
+                        <option value="1">通过</option>
+                        <option value="0">未通过</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_1">审核意见</td>
+            <td><input type="text" id="rejectReason" name="rejectReason"></td>
+        </tr>
+        <tr class="tianjie_button">
+            <td colspan="2" style="border-right:1px solid #e6e6e6;">
+                <button type="button" id="submit">确定</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+<!-- layui js -->
+<script src="/static/layui/layui.js"></script>
+<script src="/static/js/upload.js"></script>
+<script>
+
+    function form2JsonString(formId) {
+        let paramArray = $('#' + formId).serializeArray();
+        let jsonObj = {};
+        $(paramArray).each(function () {
+            jsonObj[this.name] = this.value;
+        });
+        return JSON.stringify(jsonObj);
+    }
+
+    let id = location.search.substr(1);
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        $("img").on("click", function (e) {
+            layer.photos({photos: {"data": [{"src": e.target.src}]}});
+        });
+        $.ajax({
+            url: "/api/applications/" + id,
+            success: (data) => {
+                if (data.code === 1) {
+                    for (let item in data.data) {
+                        let selector = $("#" + item);
+                        if (item === "fresh")
+                            selector.text(data.data[item] === 1 ? "是" : "否");
+                        else if (item.endsWith("Url"))
+                            selector.attr("src", host + "/" + data.data[item]);
+                        else if (item === "rejectReason")
+                            selector.val(data.data[item]);
+                        else
+                            selector.text(data.data[item]);
+                    }
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+        $("#submit").on("click", () => {
+            $(this).attr("disabled", "true");
+            $(this).text("提交中");
+            let result = $("#result").val();
+            if (result === "1") {
+                $.ajax({
+                    url: "/api/applications/permit/" + id,
+                    success: (data) => {
+                        layer.msg(data.msg);
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }
+                });
+            } else if (result === "0") {
+                $.ajax({
+                    url: "/api/applications/reject/" + id,
+                    method: "post",
+                    data: {rejectReason: $("[name=rejectReason]").val()},
+                    success: (data) => {
+                        layer.msg("审核已驳回");
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).on("mousewheel DOMMouseScroll", ".layui-layer-phimg img", function (e) {
+        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie
+            (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1)); // firefox
+        var imagep = $(".layui-layer-phimg").parent().parent();
+        var image = $(".layui-layer-phimg").parent();
+        var h = image.height();
+        var w = image.width();
+        if (delta > 0) {
+            if (h < (window.innerHeight)) {
+                h = h * 1.05;
+                w = w * 1.05;
+            }
+        } else if (delta < 0) {
+            if (h > 100) {
+                h = h * 0.95;
+                w = w * 0.95;
+            }
+        }
+        imagep.css("top", (window.innerHeight - h) / 2);
+        imagep.css("left", (window.innerWidth - w) / 2);
+        image.height(h);
+        image.width(w);
+        imagep.height(h);
+        imagep.width(w);
+    });
+</script>
+</body>
+
+</html>

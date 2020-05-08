@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/fontawesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- layui js -->
+    <script src="/static/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="wangid_conbox">
+    <!-- 当前位置 -->
+    <div class="zy_weizhi bord_b">
+        <i class="fa fa-home fa-3x"></i>
+        <a>首页</a>
+        <a>初试线上审核中心</a>
+        <span>审核</span>
+    </div>
+    <!-- 筛选 -->
+    <div id="searchForm" class="shuaix">
+        <div class="left">
+            <b>年级：</b>
+            <select name="grade">
+                <option value="">全部</option>
+                <option value="小六">小六</option>
+                <option value="初一">初一</option>
+                <option value="初三">初三</option>
+                <option value="高一">高一</option>
+            </select>
+        </div>
+        <div class="right">
+            <input type="text" name="name" placeholder="姓名">
+            <input type="text" name="userIdNum" placeholder="身份证号">
+            <input type="text" name="professionalCategory" placeholder="专业类别">
+            <input type="text" name="professionalName" placeholder="专业方向">
+            <a id="search">搜索</a>
+        </div>
+    </div>
+    <!-- 下面写内容 -->
+    <table class="layui-table" id="table" lay-filter="uploadList" lay-size="lg">
+    </table>
+</div>
+<script type="text/html" id="uploadToolBar">
+    <!--    <a class="layui-btn layui-btn-blue layui-btn-xs" lay-event="videoEvent">下载视频</a>-->
+    <!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="scoreEvent">下载成绩证明</a>-->
+    <!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="checkupEvent">下载体检证明</a>-->
+    <!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="promiseEvent">下载承诺书</a>-->
+    <a class="layui-btn layui-btn-blue layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-blue layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="/static/js/upload.js"></script>
+<script type="text/javascript">
+    function toLine(name) {
+        return name.replace(/([A-Z])/g, "_$1").toLowerCase();
+    }
+
+    layui.use('table', function () {
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#table',
+            height: 'full-130',
+            url: '/api/applications/page?status=1&stage=1&video=1',
+            defaultToolbar: ['filter', 'exports'],
+            request: {
+                pageName: 'cur',
+                limitName: 'per'
+            },
+            page: true //开启分页
+            ,
+            limits: [10, 20, 30, 40, 50, 80],
+            cols: [
+                [ //表头
+                    {
+                        field: 'id',
+                        title: 'ID',
+                        width: '10%',
+                        fixed: 'left'
+                    }, {
+                    field: 'name',
+                    title: '姓名',
+                    width: '16%'
+                }, {
+                    field: 'username',
+                    title: '身份证号码',
+                    width: '20%',
+                }, {
+                    field: 'examNum',
+                    title: '准考证号',
+                    width: '16%',
+                }, {
+                    field: 'firstScore',
+                    title: '初试成绩',
+                    width: '15%',
+                    edit: 'text',
+                    sort: true
+                }, {
+                    title: '操作',
+                    fixed: 'right',
+                    width: '25%',
+                    align: 'center',
+                    toolbar: '#uploadToolBar'
+                }]
+            ], response: {
+                statusCode: 1
+            },
+            parseData: function (res) {
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.data.total,
+                    "data": res.data.records
+                }
+            }
+        });
+        table.on('tool(uploadList)', function (obj) { //注：tool 是工具条事件名，mylist 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data, //获得当前行数据
+                layEvent = obj.event; //获得 lay-event 对应的值
+            let id = obj.data.id;
+
+            if (layEvent === 'del') {
+                layer.confirm('确定删除该报名信息吗？删除后不可撤销', function (index) {
+                    let ids = [];
+                    ids.push(id);
+                    layer.msg('[ID: ' + id + '] ' + ' 删除中，请稍后');
+                    $.ajax({
+                        url: "/api/applications",
+                        method: "delete",
+                        data: JSON.stringify(ids),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: (data) => {
+                            if (data.code === 1) {
+                                layer.msg('[ID: ' + id + '] 删除成功');
+                            } else {
+                                layer.msg('[ID: ' + id + '] 删除失败：' + data.msg);
+                            }
+                        },
+                        error: () => {
+                            layer.msg("与服务器通讯失败，请联系服务器管理员");
+                        }
+                    });
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                });
+            } else if (layEvent === 'detail') {
+                //iframe窗
+                layer.open({
+                    type: 2, //层类型
+                    title: "查看详情", //标题
+                    closeBtn: 1, //不显示关闭按钮
+                    shade: [0.3], //遮罩
+                    skin: 'demo_class_color', //iframe皮肤
+                    shadeClose: Boolean, //点击遮罩关闭
+                    area: ['1000px', '500px'],
+                    // offset: 'rb', //右下角弹出
+                    anim: 5, //动画
+                    content: ['/admin/uploadDetail?host=' + host + '&scoreUrl=' + data.scoreUrl + '&checkupUrl=' + data.checkupUrl + '&promiseUrl=' + data.promiseUrl +'&musicUrl='+ data.musicUrl + '&videoUrl=' + data.videoUrl, 'yes'], //iframe的url，no代表不显示滚动条
+                });
+            }
+        });
+        table.on('edit(uploadList)', function (obj) {
+
+            let value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field//得到字段
+                , map = {}
+                , id = data.id;
+            map[toLine(field)] = value;
+            map["id"] = id;
+
+            layer.msg('[ID: ' + id + '] ' + $("[data-field='" + field + "'] div span").text() + ' 修改中，请稍后');
+            $.ajax({
+                url: "/api/applications/edit",
+                method: "post",
+                data: JSON.stringify(map),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: (data) => {
+                    if (data.code === 1) {
+                        layer.msg('[ID: ' + id + '] ' + $("[data-field='" + field + "'] div span").text() + ' 成功更改为：' + value);
+                    } else {
+                        layer.msg('[ID: ' + id + '] ' + $("[data-field='" + field + "'] div span").text() + ' 修改失败：' + data.msg);
+                    }
+                },
+                error: () => {
+                    layer.msg("与服务器通讯失败，请联系服务器管理员");
+                }
+            });
+        });
+        table.on('sort(uploadList)', function (obj) {
+            //当前排序的字段名
+            //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+            //当前排序的 th 对象
+
+            table.reload('table', {
+                initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。
+                ,
+                where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                    orderField: toLine(obj.field) //排序字段
+                    ,
+                    order: obj.type //排序方式
+                }
+            });
+        });
+    });
+    //监听行工具事件
+
+</script>
+
+</body>
+
+</html>
+
+

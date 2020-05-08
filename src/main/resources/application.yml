@@ -1,0 +1,34 @@
+spring:
+  datasource: #如果mysql在本机，就换成127.0.0.1:mysql端口号，即：jdbc:mysql://127.0.0.1:3306/project?useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://123.57.23.52:3306/project?useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root #数据库用户名
+    password: tyfz123. #数据库密码
+  thymeleaf:
+    cache: true
+  jackson:
+    property-naming-strategy: LOWER_CAMEL_CASE
+server:
+  port: 80 #运行端口
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true #如果数据库数据更新不及时关闭此选项
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+oss:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  accessId: LTAI4FjQSXYpbbrSNEfD4mdB
+  accessKey: tPsNig0YQc5O6Ar0wYxro2hoapx8me
+  bucketName: music-exam
+  host: http://music-exam.oss-cn-beijing.aliyuncs.com  #http://bucket.endpoint
+  imageCallbackUrl: http://123.57.23.52:80/upload/verify/image #host/
+  videoCallbackUrl: http://123.57.23.52:80/upload/verify/video #host/
+  zipCallbackUrl: http://123.57.23.52:80/upload/verify/zip #host/
+  imageMaxSize: 10485760 #10m
+  videoMaxSize: 838860800 #800m
+  zipMaxSize: 31457280 #30m 1024*1024*30

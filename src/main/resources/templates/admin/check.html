@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+   <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/fontawesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- layui js -->
+    <script src="/static/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="wangid_conbox">
+    <!-- 当前位置 -->
+    <div class="zy_weizhi bord_b">
+        <i class="fa fa-home fa-3x"></i>
+        <a>首页</a>
+        <a>审核管理中心</a>
+        <span id="checkStage">待审核</span>
+    </div>
+    <!-- 筛选 -->
+    <div id="searchForm" class="shuaix">
+        <div class="left">
+            <b>年级：</b>
+            <select name="grade">
+                <option value="">全部</option>
+                <option value="小六">小六</option>
+                <option value="初一">初一</option>
+                <option value="初三">初三</option>
+                <option value="高一">高一</option>
+            </select>
+        </div>
+        <div class="right">
+            <input type="text" name="name" style="width: 120px" placeholder="姓名">
+            <input type="text" name="userIdNum"placeholder="身份证号">
+            <input type="text" name="professionalCategory" placeholder="专业类别">
+            <input type="text" name="professionalName" placeholder="专业方向">
+            <input type="text" name="year" placeholder="年份">
+            <a id="search">搜索</a>
+        </div>
+    </div>
+    <!-- 下面写内容 -->
+    <table class="layui-table" id="table" lay-filter="applicationList" lay-size="lg">
+    </table>
+</div>
+<script type="text/html" id="auditToolBar">
+    <a class="layui-btn layui-btn-xs" lay-event="audit">审核</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="toolbarDemo">
+    <a class="layui-btn layui-btn-sm" type="button" href="/export/application?status=3" id="exportAll">导出</a>
+</script>
+<script>
+    var stage = Number(location.search.substr(1));
+    var columns = [ //表头
+        {
+            field: 'id',
+            title: 'ID',
+            fixed: 'left',
+            width: '8%'
+        }, {
+            field: 'name',
+            title: '姓名',
+            width: '12%'
+        }, {
+            field: 'gender',
+            title: '性别',
+            width: '10%',
+            sort: true
+        }, {
+            field: 'grade',
+            title: '年级',
+            width: '10%',
+        }, {
+            field: 'userIdNum',
+            title: '身份证号码',
+            width: '15%',
+        }, {
+            field: 'professionalCategory',
+            title: '专业类别',
+            width: '15%'
+        }, {
+            field: 'professionalName',
+            title: '专业方向',
+            width: '15%'
+        }, {
+            fixed: 'right',
+            title:'操作',
+            width: '15%',
+            align: 'center',
+            toolbar: '#auditToolBar'
+        }];
+    var apiUrl = '/api/applications/page?stage=' + stage + '&status=0';
+    var tableOptions = {
+        elem: '#table',
+        height: 'full-130',
+        url: apiUrl,
+        request: {
+            pageName: 'cur',
+            limitName: 'per'
+        },
+        page: true,
+        limits: [10, 20, 30, 40, 50, 80],
+        cols: [columns],
+        response: {
+            statusCode: 1
+        },
+        parseData: function (res) {
+            return {
+                "code": res.code,
+                "msg": res.msg,
+                "count": res.data.total,
+                "data": res.data.records
+            }
+        }
+    };
+
+    function toLine(name) {
+        return name.replace(/([A-Z])/g, "_$1").toLowerCase();
+    }
+
+    switch (stage) {
+        case 0:
+            $("#checkStage").text("待审核");
+            break;
+        case 5:
+            $("#checkStage").text("未通过");
+            break;
+        case 10:
+            tableOptions.toolbar = '#toolbarDemo';
+            $("#checkStage").text("已通过");
+    }
+    layui.use('table', function () {
+        var table = layui.table;
+        table.render(tableOptions);
+        //监听工具条
+        $("#search").on("click", () => {
+            tableOptions.url = apiUrl;
+            $("#searchForm [name]").each(function () {
+                if ($(this).val() !== "") {
+                    tableOptions.url += "&" + $(this).attr("name") + "=" + $(this).val();
+                }
+            });
+            table.reload("table", tableOptions);
+        });
+        $("#exportAll").on("click", function () {
+            layer.msg("正在导出，导出时间据数据量而定，请耐心等待，导出过程中请勿重复导出");
+        });
+        table.on('tool(applicationList)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            let id = obj.data.id;
+            if (layEvent === 'audit') { //查看
+
+
+                layer.open({
+                    type: 2, //层类型
+                    title: "报名审核", //标题
+                    closeBtn: 1, //不显示关闭按钮
+                    shade: [0.3], //遮罩
+                    skin: 'demo_class_color', //iframe皮肤
+                    shadeClose: Boolean, //点击遮罩关闭
+                    area: ['800px', '500px'],
+                    // offset: 'rb', //右下角弹出
+                    // time: 2000, //2秒后自动关闭
+                    anim: 5, //动画
+                    content: ['/admin/detail?' + data.id, 'yes'], //iframe的url，no代表不显示滚动条
+                });
+            } else if (layEvent === 'del') { //删除
+                layer.confirm('确定删除该报名信息吗？删除后不可撤销', function (index) {
+                    let ids = [];
+                    ids.push(id);
+                    layer.msg('[ID: ' + id + '] ' + ' 删除中，请稍后');
+                    $.ajax({
+                        url: "/api/applications",
+                        method: "delete",
+                        data: JSON.stringify(ids),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: (data) => {
+                            if (data.code === 1) {
+                                layer.msg('[ID: ' + id + '] 删除成功');
+                            } else {
+                                layer.msg('[ID: ' + id + '] 删除失败：' + data.msg);
+                            }
+                        },
+                        error: () => {
+                            layer.msg("与服务器通讯失败，请联系服务器管理员");
+                        }
+                    });
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                });
+            }
+        });
+    })
+</script>
+
+</body>
+
+</html>

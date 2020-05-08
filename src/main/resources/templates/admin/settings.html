@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/fontawesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+</head>
+
+<body>
+<div class="wangid_conbox">
+    <!-- 当前位置 -->
+    <div class="zy_weizhi bord_b">
+        <i class="fa fa-home fa-3x"></i>
+        <a>首页</a>
+        <a>设置中心</a>
+        <span>设置</span>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <form class="layui-form layui-form-pane">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label layui-form-text">公告栏内容</label>
+                <div class="layui-input-block">
+                    <textarea id="info" name="info" placeholder="公告栏内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label layui-form-text">报名时间</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="time">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label layui-form-text">报名开关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" id="open" name="switch" lay-skin="switch" lay-filter="open" lay-text="开|关">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- layui js -->
+<script src="/static/layui/layui.js"></script>
+<script>
+    let open = $("#open");
+
+    function reverse() {
+        open.attr("checked") ? Close() : Open();
+    }
+
+    function Close() {
+        open.removeAttr("checked");
+        $(".layui-form-switch").removeClass("layui-form-onswitch");
+        $("em").text("关");
+    }
+
+    function Open() {
+        open.attr("checked", true);
+        $(".layui-form-switch").addClass("layui-form-onswitch");
+        $("em").text("开");
+    }
+
+    layui.use(['laydate', 'layer', 'form'], function () {
+        var laydate = layui.laydate;
+        var layer = layui.layer;
+        var form = layui.form;
+        var initVal;
+        $(".layui-form-switch").on("click", () => {
+            reverse();
+            let allowApply = $("#open").attr("checked") ? "1" : "0";
+            let option = $("#open").attr("checked") ? "开启" : "关闭";
+            $.ajax({
+                url: "/api/setting/allowApply",
+                method: "post",
+                data: {"allowApply": allowApply},
+                success: function (data) {
+                    if (data.code === 1) {
+                        layer.msg(option + "成功！");
+                    } else {
+                        layer.msg("系统错误，" + option + "失败");
+                        reverse();
+                    }
+                },
+                error: function () {
+                    layer.msg("服务端出现错误");
+                }
+            })
+        });
+
+        $.ajax({
+            url: "/api/setting",
+            method: "get",
+            success: function (data) {
+                if (data.code === 1) {
+                    initVal = data.data.time;
+                    $("#info").val(data.data.info);
+                    $("#info").on("change", function () {
+                        $.ajax({
+                            url: "/api/setting/info",
+                            method: "post",
+                            data: {info: $(this).val()},
+                            success: function (data) {
+                                if (data.code === 1) {
+                                    layer.msg("修改公告成功！");
+                                } else {
+                                    layer.msg("系统错误，修改失败");
+                                }
+                            },
+                            error: function () {
+                                layer.msg("服务端出现错误");
+                            }
+                        })
+                    });
+                    //执行一个laydate实例
+                    laydate.render({
+                        elem: '#time',
+                        range: true,
+                        value: initVal,
+                        done: function (value, date, endDate) {
+                            if (value === "")
+                                return;
+                            $.ajax({
+                                url: "/api/setting/time",
+                                method: "post",
+                                data: {time: value},
+                                success: function (data) {
+                                    if (data.code === 1) {
+                                        layer.msg("修改报名起始时间成功！");
+                                    } else {
+                                        layer.msg("系统错误，修改失败");
+                                    }
+                                },
+                                error: function () {
+                                    layer.msg("服务端出现错误");
+                                }
+                            })
+                        }
+                    });
+                    if (data.data.allowApply) {
+                        Open();
+                    }
+                }
+            },
+        });
+    });
+</script>
+</body>
+
+</html>
+

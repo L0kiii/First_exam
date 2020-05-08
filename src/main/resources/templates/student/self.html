@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.png">
+    <title>天音附中网上报名系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/default.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+
+<!-- Preloader - style you can find in spinners.css -->
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">招生考试学生端</p>
+    </div>
+</div>
+
+<!-- Main wrapper - style you can find in pages.scss -->
+
+<div id="main-wrapper">
+
+    <!-- Topbar header - style you can find in pages.scss -->
+
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+            <!-- Logo -->
+
+
+            <!-- End Logo -->
+
+
+            <div class="navbar-collapse">
+
+                <!-- toggle and nav items -->
+
+                <div style="margin-left: 40px;">
+                    <h2>欢迎登录天津音乐学院附中招生考试平台</h2>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up" href="javascript:void(0)"><i
+                            class="fa fa-bars"></i></a></li>
+
+                    <!-- Search -->
+
+
+                    <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down"
+                                                                      href="javascript:void(0)"><i
+                            class="fa fa-search"></i></a>
+                        <form class="app-search">
+                            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+                                class="fa fa-times"></i></a></form>
+                    </li>
+                </ul>
+
+                <!-- User profile and search -->
+
+
+                <ul class="navbar-nav my-lg-0">
+
+
+                    <!-- Profile -->
+
+                    <li class="nav-item dropdown u-pro">
+                        <div class="1h-100 table-responsive">
+                            <table cellspacing="0" cellpadding="0" style="color: #A2A9B3;">
+                                <tr>
+                                    <td width="20"></td>
+                                    <td></td>
+                                    <td width="20"></td>
+                                    <td>
+                                        <i  class="icon" style="font-style: normal;">姓名：</i>
+                                    </td>
+                                    <td>
+                                        <span id="info-name"></span>
+                                    </td>
+
+                                    <td width="20"></td>
+                                    <td>
+                                        <i  style="font-style: normal;">身份证号：</i>
+                                    </td>
+                                    <td><span id="info-username"></span></td>
+
+                                    <td width="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- End Topbar header -->
+
+
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="" href="/student/index"  aria-expanded="false">
+                        <i class="fa fa-tachometer"></i><span class="hide-menu">报名流程</span></a>
+                    </li>
+                    <li id="display" hidden><a class="" href="/student/submit"  aria-expanded="false">
+                        <i class="fa fa-user-circle-o"></i><span class="hide-menu">报名中心</span></a>
+                    </li>
+                    <li><a class="" href="/student/self"  aria-expanded="false">
+                        <i class="fa fa-table"></i><span class="hide-menu">报名详情</span></a>
+                    </li>
+                    <li><a class="" href="/student/pay"  aria-expanded="false">
+                        <i class="fa fa-smile-o"></i><span class="hide-menu">报名缴费</span></a>
+                    </li>
+                    <li><a class="" href="/student/exam1"  aria-expanded="false">
+                        <i class="fa fa-globe"></i><span class="hide-menu">考试信息</span></a>
+                    </li>
+                    <li><a class="" href="/student/result"  aria-expanded="false">
+                        <i class="fa fa-question-circle"></i><span class="hide-menu">查询结果</span></a>
+                    </li>
+                </ul>
+                <div class="text-center m-t-30">
+                    <a href="/logout" class="btn btn-info hidden-md-down"> 退出登录</a>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <!-- Bread crumb and right sidebar toggle -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">报名详情</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">个人管理中心</a></li>
+                        <li class="breadcrumb-item active">报名详情</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <a href="/student/index" class="btn  btn btn-info pull-right hidden-sm-down"> 返回首页</a>
+                </div>
+            </div>
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- Sales Chart and browser state-->
+            <div class="my-3 p-3 bg-white rounded shadow-lg " style="width:1000px;">
+                <div class="title"></div>
+                <h4 class="border-bottom border-gray pb-2 mb-0">&nbsp;报名详情</h4>
+
+                <div class="media text-muted pt-3">
+                    <section id="contact-area" style="margin-top:-100px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-10 offset-lg-1">
+                                    <!--start contact form-->
+                                    <div class="contact-box text-center">
+                                        <form id="printTable">
+
+                                            <!-- 基本start -->
+                                            <h3 align="center" style="color: black">2020年天津市艺术、体育类高级中等学校专业考试报名表</h3>
+                                            <h3 align="center" style="color: black">报考学校：天津音乐学院附属中等音乐学校</h3>
+                                            <div style="text-align: center"><img style="height: 130px; width: 100px;" id="img1" /></div>
+                                            </br>
+                                            <!-- start-->
+                                            <div class="form-row">
+                                                <div class="form-group table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>姓　　名：</span></td>
+                                                            <td><span id="name"></span></td>
+                                                            <td align="left"><span>性　　别：</span></td>
+                                                            <td><span id="gender"></span></td>
+
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>出生日期：</span></td>
+                                                            <td><span id="birth"></span></td>
+                                                            <td align="left"><span>证件号码：</span></td>
+                                                            <td><span id="userIdNum"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>专业类别：</span></td>
+                                                            <td><span id="professionalCategory"></span></td>
+
+                                                            <td align="left"><span>专业方向：</span></td>
+                                                            <td><span id="professionalName"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>民　　族：</span></td>
+                                                            <td><span id="nation"></span></td>
+
+                                                            <td align="left"><span>政治面貌：</span></td>
+                                                            <td><span id="politicalStatus"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>学籍号：</span></td>
+                                                            <td><span id="stuId"></span></td>
+
+                                                            <td align="left"><span>中考考号：</span></td>
+                                                            <td><span id="exmaineeId"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>户籍类别：</span></td>
+                                                            <td><span id="householdRegistrationCategory"></span></td>
+
+                                                            <td align="left"><span>户籍所在：</span></td>
+                                                            <td><span id="householdRegistration"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>所在年级：</span></td>
+                                                            <td><span id="grade"></span></td>
+
+                                                            <td align="left"><span>是否应届毕业生：</span></td>
+                                                            <td><span id="fresh"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>毕业院校：</span></td>
+                                                            <td><span id="graduatedSchool"></span></td>
+
+                                                            <td align="left"><span>户籍地址：</span></td>
+                                                            <td><span id="householdRegistrationAddress"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>所属派出所：</span></td>
+                                                            <td><span id="policeStation"> </span></td>
+
+                                                            <td align="left"><span>收信人：</span></td>
+                                                            <td><span id="addressee"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>邮编：</span></td>
+                                                            <td><span id="postcode"></span></td>
+
+                                                            <td align="left"><span>收信人地址：</span></td>
+                                                            <td><span id="addresseeAddr"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>父亲姓名：</span></td>
+                                                            <td><span id="fatherName"></span></td>
+
+                                                            <td align="left"><span>身份证号：</span></td>
+                                                            <td><span id="fatherId"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>联系方式：</span></td>
+                                                            <td><span id="fatherPhone"></span></td>
+
+                                                            <td align="left"><span>工作单位：</span></td>
+                                                            <td><span id="fatherJob"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>母亲姓名：</span></td>
+                                                            <td><span id="motherName"></span></td>
+
+                                                            <td align="left"><span>身份证号：</span></td>
+                                                            <td><span id="motherId"></span></td>
+                                                        </tr>
+                                                        <tr style="height: 30px;">
+                                                            <td align="left"><span>联系方式：</span></td>
+                                                            <td><span id="motherPhone"></span></td>
+
+                                                            <td align="left"><span>工作单位：</span></td>
+                                                            <td><span id="motherJob"></span></td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+
+                                                <div class="form-group col-lg-12">
+                                                    <td><span style="color: crimson;">请家长填表签字前认真阅读“报名须知”； 考生所填信息真实有效，否则愿意承担一切后果。 </span></td>
+                                                </div>
+                                                <!--                                                <div style="margin-right: -170px;margin-left: -150px;">-->
+                                                <!--                                                    <img src="/static/images/222.jpg" style="height: 130px; width: 120px; ">-->
+                                                <!--                                                </div>-->
+                                                <div class="form-group col-lg-12">
+                                                    <td><span style="float: right;">学生家长签字:  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </span></td>
+                                                    <br>
+                                                    <br>
+
+                                                    <td>
+                                                        <span style="float: right;">日期:  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;年  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;月  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;日</span>
+                                                    </td>
+                                                </div>
+                                            </div>
+                                            <!-- 基本end -->
+                                            <!-- <form action="" enctype="multipart/form-data" method=""> -->
+
+
+                                        </form>
+                                        <button type="button" class="btn btn-dark" onclick="printTable('printTable')">打印</button>
+                                        <br>
+                                        <br>
+                                        <div class="form-group table-responsive">
+                                            <h5>附件列表</h5>
+                                            <thead>
+                                            <tr>
+
+                                            </tr>
+                                            </thead>
+                                            <table class="table">
+                                                <tbody>
+                                                <tr style="height: 30px;">
+                                                    <td width="130" align="right">
+                                                        <span>学生一寸照片：</span>
+                                                        <img id="avatarUrl" style="height: 160px; width: 120px; " />
+                                                    </td>
+                                                    <td width="130" align="right">
+                                                        <span>身份证正面：</span>
+                                                        <img id="idFrontUrl" style="height: 160px; width: 120px; " />
+                                                    </td>
+                                                    <td width="130" align="right">
+                                                        <span>身份证反面：</span>
+                                                        <img id="idBackUrl" style="height: 160px; width: 120px; " />
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 30px;">
+                                                    <td width="130" align="right">
+                                                        <span>户口本首页：</span>
+                                                        <img id="householdRegistrationHomePageUrl" style="height: 160px; width: 120px; " />
+                                                    </td>
+                                                    <td width="130" align="right">
+                                                        <span>户口本本人页：</span>
+                                                        <img id="householdRegistrationPersonalPageUrl" style="height: 160px; width: 120px; " />
+                                                    </td>
+                                                    <td width="130" align="right">
+                                                        <span>报考介绍信：</span>
+                                                        <img id="recommendationUrl" style="height: 160px; width: 120px; " />
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="d-block text-right mt">
+                                            <a type="button" class="btn btn-dark" id="id" style="color: #f2f7f8" hidden>修改信息</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!--end contact form-->
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- End Page wrapper  -->
+    </div>
+</div>
+
+<!-- End Wrapper -->
+<!-- All Jquery -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="https://cdn.bootcss.com/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/static/js/sidebarmenu.js"></script>
+<script src="/static/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/static/js/custom.min.js"></script>
+<script src="/static/js/init.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="/static/js/printThis.js"></script>
+
+<script>
+    function printTable(id) {
+        $('#' + id).printThis({
+            importCss: true,
+            importStyle: true
+        });
+    }
+
+    $.ajax({
+        url: "/api/applications",
+        method: "get",
+        dataType: "json",
+        success: (data) => {
+            let length = data.data.length;
+            let value = length - 1;
+            if (length === 0) {
+                alert('暂无报考信息，将为您导航至报名中心.!');
+                location.href = "/student/submit";
+                $("#display").removeAttr("hidden");
+            } else if (length === 1) {
+                let img1 = data.data[value].avatarUrl;
+                $("#img1").attr("src", host+"/"+img1);
+                for (let item in data.data[value]) {
+                    let selectElement = $('#' + item);
+                    if (item === "fresh")
+                        selectElement.text(data.data[value][item] === 1 ? "是" : "否");
+                    else if (item.endsWith("Url"))
+                        selectElement.attr("src",  host+"/"+ data.data[value][item]);
+                    else if(item==="id")
+                        selectElement.attr("href","/student/submit?id="+data.data[value][item])
+                    else
+                        selectElement.text(data.data[value][item]);
+                }
+            }
+        }, error: () => {
+            alert("服务端出现错误，请稍后再试");
+        }
+    });
+</script>
+<script>
+    $.ajax({
+        url: "/api/applications/audit_info",
+        method: "get",
+        dataType: "json",
+        success: (data) => {
+            let length = data.data.length;
+            if(length===1){
+                if ( data.data[0].stage === 5) {
+                    $("#id").removeAttr("hidden");
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

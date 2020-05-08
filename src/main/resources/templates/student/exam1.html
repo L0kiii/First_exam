@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.png">
+    <title>天音附中网上报名系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/default.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+<!-- Preloader - style you can find in spinners.css -->
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">招生考试学生端</p>
+    </div>
+</div>
+
+<!-- Main wrapper - style you can find in pages.scss -->
+
+<div id="main-wrapper">
+
+    <!-- Topbar header - style you can find in pages.scss -->
+
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+            <!-- Logo -->
+
+
+            <!-- End Logo -->
+
+
+            <div class="navbar-collapse">
+
+                <!-- toggle and nav items -->
+
+                <div style="margin-left: 40px;">
+                    <h2>欢迎登录天津音乐学院附中招生考试平台</h2>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up" href="javascript:void(0)"><i
+                            class="fa fa-bars"></i></a></li>
+
+                    <!-- Search -->
+
+
+                    <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down"
+                                                                      href="javascript:void(0)"><i
+                            class="fa fa-search"></i></a>
+                        <form class="app-search">
+                            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+                                class="fa fa-times"></i></a></form>
+                    </li>
+                </ul>
+
+                <!-- User profile and search -->
+
+
+                <ul class="navbar-nav my-lg-0">
+
+
+                    <!-- Profile -->
+
+                    <li class="nav-item dropdown u-pro">
+                        <div class="1h-100 table-responsive">
+                            <table cellspacing="0" cellpadding="0" style="color: #A2A9B3;">
+                                <tr>
+                                    <td width="20"></td>
+                                    <td></td>
+                                    <td width="20"></td>
+                                    <td>
+                                        <i class="icon" style="font-style: normal;">姓名：</i>
+                                    </td>
+                                    <td>
+                                        <span id="info-name"></span>
+                                    </td>
+
+                                    <td width="20"></td>
+                                    <td>
+                                        <i style="font-style: normal;">身份证号：</i>
+                                    </td>
+                                    <td><span id="info-username"></span></td>
+
+                                    <td width="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- End Topbar header -->
+
+
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="" href="/student/index" aria-expanded="false">
+                        <i class="fa fa-tachometer"></i><span class="hide-menu">报名流程</span></a>
+                    </li>
+                    <li id="display" hidden><a class="" href="/student/submit" aria-expanded="false">
+                        <i class="fa fa-user-circle-o"></i><span class="hide-menu">报名中心</span></a>
+                    </li>
+                    <li><a class="" href="/student/self" aria-expanded="false">
+                        <i class="fa fa-table"></i><span class="hide-menu">报名详情</span></a>
+                    </li>
+                    <li><a class="" href="/student/pay" aria-expanded="false">
+                        <i class="fa fa-smile-o"></i><span class="hide-menu">报名缴费</span></a>
+                    </li>
+                    <li><a class="" href="/student/exam1" aria-expanded="false">
+                        <i class="fa fa-globe"></i><span class="hide-menu">考试信息</span></a>
+                    </li>
+                    <li><a class="" href="/student/result" aria-expanded="false">
+                        <i class="fa fa-question-circle"></i><span class="hide-menu">查询结果</span></a>
+                    </li>
+                </ul>
+                <div class="text-center m-t-30">
+                    <a href="/logout" class="btn btn-info hidden-md-down"> 退出登录</a>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper">
+
+        <!-- Container fluid  -->
+
+        <div class="container-fluid">
+
+            <!-- Bread crumb and right sidebar toggle -->
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">考试报考科目信息</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">个人管理中心</a></li>
+                        <li class="breadcrumb-item active">考试报考科目信息</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <a href="/student/index" class="btn  btn btn-info pull-right hidden-sm-down"> 返回首页</a>
+                </div>
+            </div>
+
+            <div class="my-3 p-3 bg-white rounded shadow-lg" id="main" hidden>
+                <div class="title"></div>
+                <h4 class="border-bottom border-gray pb-2 mb-0">&nbsp;考试报考科目信息</h4>
+                <div class="media text-muted pt-3">
+                    <div class="table-responsive ">
+                        <div class="zc_a_box_title">考试报考科目信息</div>
+                        <div>
+                            <div id="divWrittenSubjectInfo" style=" overflow-y: hidden">
+                                <div class="alert alert-success f16" style=" overflow-y: hidden;margin-top: 15px;">
+                                    <table>
+                                        <td style="float: right"><span>考试阶段：</span><span>初试</span></td>
+                                    </table>
+                                </div>
+                                <div style="height: auto; overflow: auto;margin-top:-20px;overflow-y: hidden">
+                                    <table class="table table-bordered table-hover table-striped text-nowrap table-scrollable printDis"
+                                           style="text-align: center;">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                准考证号
+                                            </th>
+                                            <th>
+                                                姓名
+                                            </th>
+                                            <th>
+                                                性别
+                                            </th>
+                                            <th>
+                                                年级
+                                            </th>
+                                            <th>
+                                                专业类别
+                                            </th>
+                                            <th>
+                                                专业方向
+                                            </th>
+                                            <th>
+                                                考试地点
+                                            </th>
+                                            <th>
+                                                考试时间
+                                            </th>
+
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <span id="exam_num">暂未分配</span>
+                                            </td>
+                                            <td>
+                                                <span id="name"></span>
+                                            </td>
+                                            <td>
+                                                <span id="gender"></span>
+                                            </td>
+                                            <td><span id="grade"></span></td>
+                                            <td><span id="professional_category"></span></td>
+                                            <td><span id="professional_name"></span></td>
+                                            <td><span id="first_exam_address">暂未分配</span></td>
+                                            <td><span id="first_exam_time">暂未分配</span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <table class="table table-bordered table-hover table-striped table-condensed detailsubjectTable">
+                                    <tr>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-box text-center">
+                    <form id="printTable">
+                        <!-- 基本start -->
+
+                        <div style="text-align: center">
+                            <img src="/static/images/333.jpg" style="height: 100px; width: 100px;">
+                            <h2 align="center" style="color: black">天津音乐学院附属中等音乐学校<p style="text-align: center">
+                                2020年招生考试准考证</p>
+                            </h2>
+                        </div>
+                        <!-- start-->
+                        <div class="form-row">
+                            <div class="form-group table-responsive">
+                                <table border="1" cellspacing="0px" style="margin:auto;font-size: medium;color: black;"
+                                       width="800px">
+                                    <tr height="50" style="text-align: center;">
+                                        <td>姓名</td>
+                                        <td width="100"><span id="name1"></span></td>
+                                        <td width="100">性别</td>
+                                        <td width="100"><span id="gender1"></span></td>
+                                        <td width="100">年级</td>
+                                        <td width="100"><span id="grade1"> </span></td>
+                                        <td rowspan="3" width="120"><img style="height: 130px; width: 100px; "
+                                                                         id="avatarUrl1"/></td>
+                                    </tr>
+                                    <tr height="50" style="text-align: center;">
+                                        <td>专业类别</td>
+                                        <td colspan="2"><span id="professional_category1"></span></td>
+                                        <td>专业方向</td>
+                                        <td colspan="2"><span id="professional_name1"></span></td>
+                                    </tr>
+                                    <tr height="50" style="text-align: center;">
+                                        <td width="100">准考证号</td>
+                                        <td colspan="5"><span id="exam_num1">暂未分配</span></td>
+                                    </tr>
+
+                                    <tr height="50" style="text-align: center;">
+                                        <td>考试时间</td>
+                                        <td colspan="8"><span id="first_exam_time1">暂未分配</span></td>
+
+                                    </tr>
+                                    <tr height="50" style="text-align: center;">
+
+                                        <td>考试地点</td>
+                                        <td colspan="8"><span id="first_exam_address1">暂未分配</span></td>
+                                    </tr>
+
+                                    <tr height="50">
+                                        <td colspan="8" style="text-align: center;font-size: large;">考试视频录制须知</td>
+                                    </tr>
+                                    <tr height="600" valign="top">
+                                        <td colspan="8" rowspan="1"
+                                            style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+
+                                            <p>&nbsp;&nbsp;一、专业视频录制及报送要求</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.录制器材采用智能手机，室内光线充足，正面受光，素色背景。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.录制时采用一个长镜头全景定点录制，保持镜头稳定，清晰展现考生全貌，不间断录制，</p>
+
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声音和图像需同步录制，期间不得转切画面，不得采用任何视频编辑手段美化处理画面，</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不得采用任何音频编辑手段美化编辑音频。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.视频中只能出现考生一人的形象，不得出现任何其他人员。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.视频格式为Mp4或Mov，分辨率1080P，所有曲目（包含舞蹈）一次性不间断录制成一个视频文件，</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总时长不超过12分钟，文件大小不超过600M。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.考生在录制视频文件前，手持准考证，正面免冠近景录制清晰图像5秒（不计入考试时间），</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后自报姓名、报考年级、专业、演奏曲目，（例：我叫**，报考**年级**专业，</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我演奏的曲目是1,2,3….)。舞蹈专业还需自报身高、体重。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.考生在视频提交的规定时间内仅可上传一次视频，使用Windows Media Player播放器查看视频是否可以</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正常播放后再进行上传。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.视频文件以“准考证号+考生姓名+报考年级”命名（例203040603001张**初一），上传报名系统。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传视频文件的同时上传“考生诚信承诺书”扫描件的清晰图片,具体上传时间详见准考证。</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.凡违反上述规定者，将被视为违规并取消考试资格。</p>
+                                            <p>&nbsp;&nbsp;二、注意事项：</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、考生诚信承诺书、视频须按准考证规定的时间上传</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、作曲专业的电子版作品打包压缩成一个文件上传</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、文化课成绩证明、体检报告上传截止时间为5月24日</p>
+                                            <br>
+                                            <span style="float: right; ">天津音乐学院附中招生办制</span>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </form>
+                    <button id="printMain" type="button " class="btn btn-dark " onclick="printTable( 'printTable') "
+                            hidden>打印
+                    </button>
+                </div>
+                <!-- End Page wrapper  -->
+
+            </div>
+            <div class="my-3 p-3 bg-white rounded shadow-lg" id="mainUpload" hidden>
+                <div class="title"></div>
+                <h4 class="border-bottom border-gray pb-2 mb-0">&nbsp;文件上传</h4>
+                <div class="media text-muted pt-3">
+                    <div class="table-responsive ">
+                        <div class="zc_a_box_title">图片上传：请同学们打印完后再上传证明！体检证明和乐谱请上传压缩包zip文件</div>
+                        <div>
+                            <div class="form-row" id="uploads">
+                                <div class="form-group table-responsive text-center">
+                                    <form id="submitForm" action="/api/applications" method="post" name="form">
+                                        <input id="mainId" name="id" hidden>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr id="label_one">
+                                                <th scope="row">1</th>
+                                                <td>成绩证明</td>
+                                                <td>
+                                                    <label type="button" class="btn">
+                                                        <span>选择图片</span>
+                                                        <input type="file" id="imageUploader">
+                                                        <span></span>
+                                                        <input type="text" id="scoreUrl" name="scoreUrl" hidden>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr id="label_two">
+                                                <th scope="row">2</th>
+                                                <td>体检证明(上传文件为压缩包)</td>
+                                                <td>
+
+                                                    <label type="button" class="btn">
+                                                        <span>选择文件</span>
+                                                        <input type="file" id="imageUploader1">
+                                                        <span></span>
+                                                        <input type="text" id="checkupUrl" name="checkupUrl" hidden>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr id="label_three">
+                                                <th scope="row">3</th>
+                                                <td>承诺书</td>
+                                                <td>
+
+                                                    <label type="button" class="btn">
+                                                        <span>选择图片</span>
+                                                        <input type="file" id="imageUploader2" required>
+                                                        <span></span>
+                                                        <input type="text" id="promiseUrl" name="promiseUrl" hidden>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr id="label_seven">
+                                                <th scope="row">4</th>
+                                                <td>乐谱(上传文件为压缩包,仅限作曲专业)</td>
+                                                <td>
+
+                                                    <label type="button" class="btn">
+                                                        <span>选择文件</span>
+                                                        <input type="file" id="imageUploader6">
+                                                        <span></span>
+                                                        <input type="text" id="musicUrl" name="musicUrl" hidden>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-dark" id="submit">提交</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="zc_a_box_title"> 视频上传：请同学们上传完图片后再上传视频！</div>
+                        <div>
+                            <div class="form-row" id="video" hidden>
+                                <div class="form-group table-responsive text-center">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="table-default">
+                                            <th scope="row">1</th>
+                                            <td>视频上传</td>
+                                            <td>
+
+                                                <label type="button" class="btn">
+                                                    <span>选择视频</span>
+                                                    <input type="file" id="videoUploader">
+                                                    <span></span>
+                                                    <input type="text" id="applicationId" name="applicationId" hidden>
+                                                </label>
+                                                <div id="upload-bar" class="progress-bar"
+                                                     style="width: 0%; border-radius: 25px;background: linear-gradient(to right, #4cccda 35%,#3b7eda 68%);"
+                                                     hidden>
+                                                    <div id="upload-value" class="progress-value">0%</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!-- End Wrapper -->
+
+
+<!-- All Jquery -->
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="https://cdn.bootcss.com/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/static/js/sidebarmenu.js"></script>
+<script src="/static/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/static/js/custom.min.js"></script>
+<script src="/static/js/init.js"></script>
+<script src="/static/js/printThis.js"></script>
+<script src="/static/js/upload.js"></script>
+<script>
+    function printTable(id) {
+        $('#' + id).printThis({
+            importCss: true,
+            importStyle: true
+        });
+    }
+
+    $.ajax({
+        url: "/api/applications/exam_info",
+        method: "get",
+        dataType: "json",
+        success: (data) => {
+            let length = data.data.length;
+            let value = length - 1;
+            if (length === 0) {
+                alert('暂无报考信息，将为您导航至报名中心!');
+                location.href = "/student/submit";
+                $("#display").removeAttr("hidden");
+            } else if (length === 1) {
+                $("#main").removeAttr("hidden");
+                if (data.data[0].stage === 1 && data.data[0].status === 1)
+                    $("#mainUpload").removeAttr("hidden");
+                for (let item in data.data[value]) {
+                    let selectElement = $('#' + item);
+                    selectElement.text(data.data[value][item]);
+                }
+                for (let item in data.data[value]) {
+                    let selectElement = $('#' + item + '1');
+                    selectElement.text(data.data[value][item]);
+                }
+                if (data.data[0].exam_num !== undefined) {
+                    $("#printMain").removeAttr("hidden");
+                }
+            }
+        }, error: () => {
+            alert("服务端出现错误，请稍后再试");
+        }
+    });
+    $.ajax({
+        url: "/api/applications",
+        method: "get",
+        dataType: "json",
+        success: (data) => {
+            let length = data.data.length;
+            if (length === 1) {
+                $("#mainId").val(data.data[0].id);
+                for (let item in data.data[0]) {
+                    let selectElement = $('#' + item + '1');
+                    if (item.endsWith("Url"))
+                        selectElement.attr("src", host + "/" + data.data[0][item]);
+                }
+            }
+        }, error() {
+            alert("服务端出现错误，请稍后再试");
+        }
+    })
+</script>
+<script>
+    $("#videoUploader").on("change", () => {
+        uploadVideo($("#videoUploader"), $("#upload-bar"), $("#upload-value"), $("#mainId").val());
+    });
+    $("#imageUploader").on("change", () => {
+        uploadImage($("#imageUploader"), $("#scoreUrl"), $("#label_one"));
+    });
+    $("#imageUploader1").on("change", () => {
+        uploadZip($("#imageUploader1"), $("#checkupUrl"), $("#label_two"));
+    });
+    $("#imageUploader2").on("change", () => {
+        uploadImage($("#imageUploader2"), $("#promiseUrl"), $("#label_three"));
+    });
+    $("#imageUploader6").on("change", () => {
+        uploadZip($("#imageUploader6"), $("#musicUrl"), $("#label_seven"));
+    });
+</script>
+<script>
+    function form2JsonString(formId) {
+        let paramArray = $('#' + formId).serializeArray();
+        let jsonObj = {};
+        $(paramArray).each(function () {
+            jsonObj[this.name] = this.value;
+        });
+        return JSON.stringify(jsonObj);
+    }
+
+    $("#submit").on("click", function () {
+        $(this).attr("disabled", "true");
+        $(this).text("提交中");
+        $("#submitForm").ajaxSubmit({
+            type: "post",
+            url: "/api/applications/urls",
+            success: (data) => {
+                if (document.getElementById("imageUploader2").value == null || document.getElementById("imageUploader2").value == "") {
+                    alert("请选择上传承诺书");
+                } else if (data.code === 1) {
+                    alert("提交上传成功");
+                    $("#video").removeAttr("hidden");
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: () => {
+                alert("服务端出现错误，请稍后再试");
+            },
+            complete: () => {
+                $("#submit").removeAttr("disabled");
+                $("#submit").text("提交");
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

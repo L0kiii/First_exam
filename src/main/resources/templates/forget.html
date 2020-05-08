@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>天音附中网上报名系统</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/googlefonts/Poppins.css">
+    <link rel="stylesheet" href="/static/css/style.default1.css" id="theme-stylesheet">
+</head>
+
+<body>
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo" style="margin-top: -95px;text-align: center;">
+                                <img src="/static/images/123.jpg">
+                            </div>
+                            <h6 style="font-size: 30px;font-weight: 600;margin-top: 55px;text-align: center;margin-left: 50px;">
+                                天津音乐学院附属中等音乐学校</h6>
+                            </br>
+                            <h6 style="font-size: 30px;font-weight: 600;text-align: center;">网上报名系统</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form action="/api/users?reset=1" id="resetForm" method="post">
+                                <div class="form-group">
+                                    <input id="name" class="input-material" type="text" name="name" placeholder="请输入姓名">
+                                    <div class="invalid-feedback">
+                                        请输入有效的姓名
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="username" class="input-material" type="text" name="username"
+                                           placeholder="请输入身份证号码">
+                                    <div class="invalid-feedback">
+                                        请输入有效的身份证号码
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="phone" class="input-material" type="text" name="phone"
+                                           placeholder="请输入手机号码">
+                                    <div class="invalid-feedback">
+                                        请输入有效的手机号码
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" class="input-material" type="password" name="password"
+                                           placeholder="请输入密码">
+                                    <div class="invalid-feedback">
+                                        密码不符合要求：包含大小写字母及数字，最少8位
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="repeat" class="input-material" type="password" placeholder="确认密码">
+                                    <div class="invalid-feedback">
+                                        两次密码必须相同
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="captcha" name="captcha" class="input-material" type="text"
+                                           placeholder="验证码">
+                                    <div class="invalid-feedback">
+                                        请输入验证码
+                                    </div>
+                                    <img src="/captcha" id="captchaImg">
+                                </div>
+                                <div class="form-group">
+                                    <button id="submit" type="button" name="registerSubmit" class="btn btn-primary">
+                                        重置
+                                    </button>
+                                </div>
+                            </form>
+                            <small>已有账号?</small><a href="login.html" class="signup">&nbsp;登录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blockquote-footer" style="text-align: center;font-size: medium;margin-top:-60px;margin-bottom: 20px">
+        本系统技术支持：天津广一科技发展有限公司  —
+    </div>
+</div>
+
+<!-- JavaScript files-->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script>
+    function form2JsonString(formId) {
+        let paramArray = $('#' + formId).serializeArray();
+        let jsonObj = {};
+        $(paramArray).each(function () {
+            jsonObj[this.name] = this.value;
+        });
+        return JSON.stringify(jsonObj);
+    }
+
+    $("#captchaImg").on("click", changeCaptcha);
+
+    var requestTimes = 0;
+    setTimeout("requestTimes = 0", 10);
+
+    function changeCaptcha() {
+        if (requestTimes >= 6) {
+            alert("请勿频繁刷新！");
+            return;
+        }
+        requestTimes++;
+        let time = new Date().getTime();
+        $("#captchaImg").attr("src", "/captcha?" + time);
+    }
+
+    $(function () {
+        function valid(selector) {
+            bool = true;
+            let id = selector.attr("id");
+            switch (id) {
+                case "name":
+                    bool = /^[\u4e00-\u9fa5]{2,6}$/.test(selector.val());
+                    break;
+                case "username":
+                    bool = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(selector.val());
+                    break;
+                case "phone":
+                    bool = /^1[3456789]\d{9}$/.test(selector.val());
+                    break;
+                case "repeat":
+                    bool = selector.val() === $("#password").val();
+                    break;
+                case "password":
+                    bool = /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/.test($("#password").val());
+                    break;
+            }
+            bool ? selector.removeClass("form-control is-invalid") : selector.addClass("form-control is-invalid");
+            return bool;
+        }
+
+        $.each($("input"), function (index, selector) {
+            $(selector).on("change", function () {
+                valid($(this));
+            })
+        });
+
+
+        $("#submit").on("click", () => {
+
+            let allow = true;
+            $.each($("input"), (index, selector) => {
+                allow = allow ? valid($(selector)) : allow;
+            });
+            if (!allow) {
+                return;
+            }
+            let options = {
+                url: "/api/users?reset=1&captcha=" + $("#captcha").val(),
+                type: "post",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: form2JsonString("resetForm"),
+                success: (data) => {
+                    if (data.code === 1) {
+                        alert("重置成功");
+                        location.href = "/";
+                    } else if (data.code === 10001) {
+                        changeCaptcha();
+                        alert(data.data.defaultMessage);
+                    } else {
+                        changeCaptcha();
+                        alert(data.msg)
+                    }
+                },
+                error: () => {
+                    changeCaptcha();
+                    alert("服务端出现错误，请稍后再试");
+                },
+                complete: () => {
+                    $("#register").removeAttr("disabled");
+                    $("#register").text("重置");
+                }
+            };
+            $("#register").attr("disabled", "true");
+            $("#register").text("重置中");
+            $.ajax(options);
+        })
+    })
+</script>
+</body>
+
+</html>

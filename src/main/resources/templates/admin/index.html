@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/fontawesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body class="layui-layout-body control_box">
+<!-- 背景 -->
+
+<!-- content box-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">招生考试管理端</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">欢迎登录天津音乐学院附属</li>
+            <li class="layui-nav-item">中等音乐学校招生考试管理中心</li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    管理员
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="logout">退出登录</a></li>
+        </ul>
+    </div>
+
+    <!-- side menu -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;"><i class="fa"></i>审核管理中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/check?0" target="main_self_frame">待审核</a></dd>
+                        <dd><a href="/admin/check?5" target="main_self_frame">未通过</a></dd>
+                        <dd><a href="/admin/check?10" target="main_self_frame">已通过</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa"></i>用户管理中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/stu_list" target="main_self_frame">用户管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa"></i>财务管理中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/pay?1" target="main_self_frame">初试</a></dd>
+                        <dd><a href="/admin/pay?2" target="main_self_frame">复试</a></dd>
+                        <dd><a href="/admin/pay?3" target="main_self_frame">文考</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa"></i>考务管理中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/exam?1" target="main_self_frame">初试</a></dd>
+                        <dd><a href="/admin/exam?2" target="main_self_frame">复试</a></dd>
+                        <dd><a href="/admin/exam?3" target="main_self_frame">文考</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa"></i>成绩管理中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/result?1" target="main_self_frame">初试</a></dd>
+                        <dd><a href="/admin/result?2" target="main_self_frame">复试</a></dd>
+                        <dd><a href="/admin/result?3" target="main_self_frame">文考</a></dd>
+                        <dd><a href="/admin/result?4" target="main_self_frame">录取成绩总览</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/admin/video" target="main_self_frame"><i class="fa"></i>上传管理中心</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/admin/settings" target="main_self_frame"><i class="fa"></i>设置中心</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 展开收起按钮 -->
+        <div class="open_shrink open" title="展开/收起">
+            <span></span>
+        </div>
+        <script>
+            $(function () {
+                $(".open_shrink").click(function () {
+                    if ($(this).hasClass("open")) {
+                        $(this).removeClass("open");
+                        $(".layui-side").stop().animate({
+                            left: -220
+                        }, 300);
+                        $(".layui-body").stop().animate({
+                            left: 0
+                        }, 300);
+                    } else {
+                        $(this).addClass("open");
+                        $(".layui-side").stop().animate({
+                            left: 0
+                        }, 300);
+                        $(".layui-body").stop().animate({
+                            left: 220
+                        }, 300);
+                    }
+                })
+            })
+        </script>
+        <!-- iframe -->
+        <iframe src="/admin/check?0" name="main_self_frame" frameborder="0" class="layadmin-iframe" scrolling="yes"></iframe>
+    </div>
+
+</div>
+<!-- layui js -->
+<script src="/static/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+
+</script>
+
+</body>
+
+</html>

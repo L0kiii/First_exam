@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.png">
+    <title>天音附中网上报名系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/colors/default.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+<!-- Preloader - style you can find in spinners.css -->
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">招生考试学生端</p>
+    </div>
+</div>
+
+<!-- Main wrapper - style you can find in pages.scss -->
+
+<div id="main-wrapper">
+
+    <!-- Topbar header - style you can find in pages.scss -->
+
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+            <!-- Logo -->
+
+
+            <!-- End Logo -->
+
+
+            <div class="navbar-collapse">
+
+                <!-- toggle and nav items -->
+
+                <div style="margin-left: 40px;">
+                    <h2>欢迎登录天津音乐学院附中招生考试平台</h2>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up" href="javascript:void(0)"><i
+                            class="fa fa-bars"></i></a></li>
+
+                    <!-- Search -->
+
+
+                    <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down"
+                                                                      href="javascript:void(0)"><i
+                            class="fa fa-search"></i></a>
+                        <form class="app-search">
+                            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+                                class="fa fa-times"></i></a></form>
+                    </li>
+                </ul>
+
+                <!-- User profile and search -->
+
+
+                <ul class="navbar-nav my-lg-0">
+
+
+                    <!-- Profile -->
+
+                    <li class="nav-item dropdown u-pro">
+                        <div class="1h-100 table-responsive">
+                            <table cellspacing="0" cellpadding="0" style="color: #A2A9B3;">
+                                <tr>
+                                    <td width="20"></td>
+                                    <td></td>
+                                    <td width="20"></td>
+                                    <td>
+                                        <i id="name" class="icon" style="font-style: normal;">姓名：</i>
+                                    </td>
+                                    <td>
+                                        <span id="info-name"></span>
+                                    </td>
+
+                                    <td width="20"></td>
+                                    <td>
+                                        <i id="username" style="font-style: normal;">身份证号：</i>
+                                    </td>
+                                    <td><span id="info-username"></span></td>
+
+                                    <td width="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- End Topbar header -->
+
+
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="" href="/student/index" aria-expanded="false">
+                        <i class="fa fa-tachometer"></i><span class="hide-menu">报名流程</span></a>
+                    </li>
+                    <li id="display" hidden><a class="" href="/student/submit" aria-expanded="false">
+                        <i class="fa fa-user-circle-o"></i><span class="hide-menu">报名中心</span></a>
+                    </li>
+                    <li><a class="" href="/student/self" aria-expanded="false">
+                        <i class="fa fa-table"></i><span class="hide-menu">报名详情</span></a>
+                    </li>
+                    <li><a class="" href="/student/pay" aria-expanded="false">
+                        <i class="fa fa-smile-o"></i><span class="hide-menu">报名缴费</span></a>
+                    </li>
+                    <li><a class="" href="/student/exam1" aria-expanded="false">
+                        <i class="fa fa-globe"></i><span class="hide-menu">考试信息</span></a>
+                    </li>
+                    <li><a class="" href="/student/result" aria-expanded="false">
+                        <i class="fa fa-question-circle"></i><span class="hide-menu">查询结果</span></a>
+                    </li>
+                </ul>
+                <div class="text-center m-t-30">
+                    <a href="/logout" class="btn btn-info hidden-md-down"> 退出登录</a>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper">
+
+        <!-- Container fluid  -->
+
+        <div class="container-fluid">
+
+            <!-- Bread crumb and right sidebar toggle -->
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">报名缴费信息</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">个人管理中心</a></li>
+                        <li class="breadcrumb-item active">报名缴费</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <a href="/student/index" class="btn   btn btn-info pull-right hidden-sm-down"> 返回首页</a>
+                </div>
+            </div>
+            <div class="my-3 p-3 bg-white rounded shadow-lg" id="main" hidden>
+                <div class="title"></div>
+                <h4 class="border-bottom border-gray pb-2 mb-0">&nbsp;报名缴费信息</h4>
+                <div class="media text-muted pt-3">
+                    <div>
+
+                        <!-- 初试 -->
+                        <h4 style="text-align: center"> 考试缴费信息</h4>
+                        <!--                        <div class="collapse" id="collapseExample">-->
+                        <div>
+                            <div class="alert alert-success f16 table-responsive" style="margin-top: 15px;">
+                                <table style="width: 100%; margin: -10px 0px;" border="0">
+                                </table>
+                            </div>
+                            <div>
+                                <div class="table-responsive"
+                                     style="height: auto; overflow: auto; border-top: 1px solid #ccc; margin-top: -20px; ">
+                                    <table class="table table-bordered table-hover table-striped text-nowrap table-scrollable detailsubjectTable">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                科目
+                                            </th>
+                                            <th>
+                                                专业方向
+                                            </th>
+                                            <th>
+                                                缴费码
+                                            </th>
+                                            <th>
+                                                支付状态
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <td>
+                                            <span>考试</span>
+                                        </td>
+                                        <td>
+                                            <span name="main_professional_name"></span>
+                                        </td>
+                                        <td>
+                                            <span name="main_first_financial_code"></span>
+                                        </td>
+                                        <td>
+                                            <span name="main_first_judge"></span>
+                                        </td>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-3 p-3 bg-white rounded shadow-lg">
+                <div>
+                    <div class="title"></div>
+                    <h4 class="border-bottom border-gray pb-2 mb-0">&nbsp;扫码缴款流程</h4>
+                    <div class="media text-muted pt-3">
+                        <div style="text-align: center">
+                            <h3> 第一步 </h3>
+                            <h5 class="modal-title" style="font-size: medium;font-weight: 900;color: lightcoral;">
+                                通过微信或支付宝扫下方二维码</h5>
+                            <div class="modal-body">
+                                <img src="/static/images/pay.jpg" style="height: 200px; width: 200px;" alt="">
+                            </div>
+                        </div>
+
+                        <div style="width: 100px;"></div>
+
+                        <div style="text-align: center">
+                            <h3>第二步</h3>
+                            <h5 class="modal-title" style="font-size: medium;font-weight: 900;color: lightcoral;">
+                                将20位缴款码准确输入下方框内，点击“下一步”。</h5>
+                            <div class="modal-body">
+                                <img src="/static/images/pay1.jpg" style="height: 500px; width: 280px;" alt="">
+                            </div>
+                        </div>
+
+                        <div style="width: 100px;"></div>
+
+                        <div style="text-align: center">
+                            <h3>第三步</h3>
+                            <h5 class="modal-title" id="pay2LongTitle"
+                                style="font-size: medium;font-weight: 900;color: lightcoral;">
+                                请认真核对姓名和缴款金额，账单说明中点击“查看”可以查看具体缴费项目。核对完毕后点击“确认缴费”缴款。</h5>
+
+                            <div class="modal-body">
+                                <img src="/static/images/pay2.jpg" style="height: 530px; width: 280px;" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- End Wrapper -->
+<!-- All Jquery -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="https://cdn.bootcss.com/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/static/js/sidebarmenu.js"></script>
+<script src="/static/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/static/js/custom.min.js"></script>
+<script src="/static/js/init.js"></script>
+<script>
+    var data = [];
+
+    function init() {
+        $.ajax({
+            url: "/api/applications/financial",
+            method: "get",
+            dataType: "json",
+            success: (response) => {
+                data = response.data;
+                $.each(data, function (index, item) {
+                    item.stage = (item.stage + 5) % 5;
+                    if (item.stage === 0) {
+                        data.splice(index, 1);
+                        return;
+                    }
+                    addJudge(item);
+                    let isMain = !index & 1;
+                    processFinancialCode(item);
+                    dataBind(item, isMain);
+                });
+                if (data.length > 0)
+                    $("#main").removeAttr("hidden");
+            }
+        })
+    }
+
+    function addJudge(application) {
+        application.first_judge = application.stage > 1 || application.status === 1 ? "已缴费" : "未缴费";
+        application.second_judge = application.stage > 2 || application.status === 1 ? "已缴费" : "未缴费";
+        application.cultural_judge = application.stage > 3 || application.status === 1 ? "已缴费" : "未缴费";
+        if (application.stage < 3)
+            application.cultural_judge = "";
+        if (application.stage < 2)
+            application.second_judge = "";
+        if (application.stage < 1)
+            application.first_judge = "";
+    }
+
+    function isNotSet(attr) {
+        return attr === null || typeof (attr) === "undefined" || attr.length === 0;
+    }
+
+    function processFinancialCode(application) {
+        if (isNotSet(application.first_financial_code) && application.stage >= 1) application.first_financial_code = "未分配";
+        if (isNotSet(application.second_financial_code) && application.stage >= 2) application.second_financial_code = "未分配";
+        if (isNotSet(application.cultural_financial_code) && application.stage >= 3) application.cultural_financial_code = "未分配";
+        if (application.stage < 3)
+            application.cultural_financial_code = "";
+        if (application.stage < 2)
+            application.second_financial_code = "";
+        if (application.stage < 1)
+            application.first_financial_code = "";
+    }
+
+    function dataBind(application, isMain) {
+        let prefix = isMain ? "main_" : "secondary_";
+        for (let i in application) {
+            $("[name=" + prefix + i + "]").text(application[i]);
+        }
+    }
+
+    init();
+
+</script>
+<script>
+    $.ajax({
+        url: "/api/applications",
+        method: "get",
+        dataType: "json",
+        success: (data) => {
+            let length = data.data.length;
+            if (length === 0) {
+                alert('暂无报考信息，将为您导航至报名中心!');
+                location.href = "/student/submit";
+                $("#display").removeAttr("hidden");
+            }
+        }
+    })
+</script>
+</body>
+</html>

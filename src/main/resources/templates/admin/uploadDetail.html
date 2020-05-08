@@ -1,0 +1,118 @@
+<!-- 列表的编辑 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>天音附中网上报名管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- layui js -->
+    <script src="/static/layui/layui.js"></script>
+</head>
+
+
+<body style="background: #fff;">
+<div class="tianjia_xx">
+    <table class="if_tianjiatext layui-table" id="editor"lay-size="lg">
+        <tbody>
+        <tr>
+            <td><span>成绩证明：</span></td>
+            <td><img name="scoreUrl"/></td>
+                <td><a name="scoreUrl1" class="layui-btn layui-btn-blue layui-btn-xs">下载</a></td>
+        </tr>
+        <tr>
+            <td><span>体检证明：</span></td>
+            <td><span>该文件为压缩包文件，请下载后查看</span></td>
+            <td><a name="checkupUrl" class="layui-btn layui-btn-blue layui-btn-xs">下载</a></td>
+        </tr>
+        <tr>
+            <td><span>承诺书：</span></td>
+            <td><img name="promiseUrl"/></td>
+                <td><a name="promiseUrl1" class="layui-btn layui-btn-blue layui-btn-xs">下载</a></td>
+        </tr>
+        <tr>
+            <td><span>乐谱：</span></td>
+            <td><span>该文件为压缩包文件，请下载后查看</span></td>
+            <td><a name="musicUrl" class="layui-btn layui-btn-blue layui-btn-xs">下载</a></td>
+        </tr>
+        <tr>
+            <td><span>初试视频：</span></td>
+            <td>
+                <video id="videoUrl" controls="true">
+                    您的浏览器不支持播放此视频，请下载本地观看
+                </video>
+                <br><small style="color: darkgray">*在线播放仅支持mp4格式,非标准mp4可能出现无画面、无声音等现象，建议下载播放</small></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    let urls = GetRequest();
+    $("[name='scoreUrl']").attr("src", urls.host + "/" + urls.scoreUrl);
+    $("[name='scoreUrl1']").attr("href", urls.host + "/" + urls.scoreUrl);
+    $("[name='checkupUrl']").attr("href", urls.host + "/" + urls.checkupUrl);
+    $("[name='promiseUrl']").attr("src", urls.host + "/" + urls.promiseUrl);
+    $("[name='promiseUrl1']").attr("href", urls.host + "/" + urls.promiseUrl);
+    $("[name='musicUrl']").attr("href", urls.host + "/" + urls.musicUrl);
+    $("#videoUrl").attr("src", urls.host + "/" + urls.videoUrl);
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        $("img").on("click", function (e) {
+            layer.photos({photos: {"data": [{"src": e.target.src}]}});
+        });
+    });
+
+    $(document).on("mousewheel DOMMouseScroll", ".layui-layer-phimg img", function (e) {
+        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie
+            (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1)); // firefox
+        var imagep = $(".layui-layer-phimg").parent().parent();
+        var image = $(".layui-layer-phimg").parent();
+        var h = image.height();
+        var w = image.width();
+        if (delta > 0) {
+            if (h < (window.innerHeight)) {
+                h = h * 1.05;
+                w = w * 1.05;
+            }
+        } else if (delta < 0) {
+            if (h > 100) {
+                h = h * 0.95;
+                w = w * 0.95;
+            }
+        }
+        imagep.css("top", (window.innerHeight - h) / 2);
+        imagep.css("left", (window.innerWidth - w) / 2);
+        image.height(h);
+        image.width(w);
+        imagep.height(h);
+        imagep.width(w);
+    });
+</script>
+</body>
+
+</html>
